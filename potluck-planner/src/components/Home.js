@@ -6,7 +6,9 @@ const StyledHeroImg = styled.div`
   background-image: url(${heroBg});
   height: 40vh;
   background-position: center;
-  background-repeat: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid white;
 `;
 
 const StyledHome = styled.section`
@@ -33,7 +35,7 @@ const StyledHome = styled.section`
 function Home() {
   return (
     <div className='wrapper'>
-      <StyledHeroImg imgScr={process.env.PUBLIC_URL + '/family.jpg'} />
+      <StyledHeroImg />
       <StyledHome>
         <h2>Welcome to Cookouts!</h2>
         <div>
