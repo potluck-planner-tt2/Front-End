@@ -4,18 +4,19 @@ import styled from 'styled-components';
 import image from '../images/potluck_icon.jpg';
 
 const StyledHeader = styled.header`
-  background: linear-gradient(to bottom, #56ab2f, #a8e063);
+  /* background: linear-gradient(to bottom, #56ab2f, #a8e063); */
+  background-color: #5cdb95;
 
   .navBar {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    box-shadow: 0px 3px 10px 2px #2e2e2e;
+    box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4);
     /* width 100% for bigger screens / chop body to 80%? play with media queries*/
 
     h1 {
       font-family: 'Lobster', cursive;
-      font-size: 6rem;
+      font-size: 2.8rem;
       color: white;
       margin-left: 3%;
       text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.6);
@@ -37,13 +38,15 @@ const StyledHeader = styled.header`
   }
 
   .btn {
-    padding: 5px 10px;
+    padding: 10px 15px;
     margin: 10px;
+    border: none;
     border-radius: 7px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: black;
-    background: #87ceeb;
+    font-size: 1.1rem;
+    /* font-weight: 600; */
+    color: white;
+    /* background: #87ceeb; */
+    background: #05386b;
 
     :hover {
       cursor: pointer;
@@ -63,7 +66,7 @@ function Header(props) {
   const history = useHistory();
 
   return (
-    <StyledHeader className='header'>
+    <StyledHeader>
       <nav className='navBar'>
         <div className='banner'>
           <div>

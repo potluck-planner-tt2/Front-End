@@ -38,10 +38,6 @@ const initialMember = [];
 const initialDisabled = true;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  height: 80vh;
   text-align: center;
   background: url('https://background-tiles.com/overview/white/patterns/large/1027.png');
 `;
@@ -95,40 +91,38 @@ function App() {
   };
 
   return (
-    <div>
+    <Wrapper>
       <Header />
-      <div>
-        <Switch>
-          {/* Designing UserProfile, adding path/props after */}
-          {/* /profile path is just for testing */}
-          <Route path='/profile'>
-            <UserProfile />
-          </Route>
-          <Route path='/login'>
-            <Login
-              values={formValues}
-              onChange={onChange}
-              onSubmit={onSubmit}
-              disabled={isDisabled}
-              errors={formErrors}
-            />
-          </Route>
-          <Route path='/registration'>
-            <Registration
-              values={formValues}
-              onChange={onChange}
-              onSubmit={onSubmit}
-              disabled={isDisabled}
-              errors={formErrors}
-            />
-          </Route>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        {/* Designing UserProfile, adding path/props after */}
+        {/* /profile path is just for testing */}
+        <Route path='/profile'>
+          <UserProfile />
+        </Route>
+        <Route path='/login'>
+          <Login
+            values={formValues}
+            onChange={onChange}
+            onSubmit={onSubmit}
+            disabled={isDisabled}
+            errors={formErrors}
+          />
+        </Route>
+        <Route path='/registration'>
+          <Registration
+            values={formValues}
+            onChange={onChange}
+            onSubmit={onSubmit}
+            disabled={isDisabled}
+            errors={formErrors}
+          />
+        </Route>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+      </Switch>
       <Footer />
-    </div>
+    </Wrapper>
   );
 }
 
