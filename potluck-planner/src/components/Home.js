@@ -6,7 +6,8 @@ const StyledHeroImg = styled.div`
   background-image: url(${heroBg});
   height: 40vh;
   background-position: center;
-  background-repeat: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 const StyledHome = styled.section`
