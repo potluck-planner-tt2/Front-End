@@ -39,9 +39,9 @@ const initialDisabled = true;
 
 const Wrapper = styled.div`
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column;
   justify-content: space-between;
-  min-height: 100vh;
+  height: 80vh;
   text-align: center;
   background: url('https://background-tiles.com/overview/white/patterns/large/1027.png');
 `;
@@ -97,7 +97,7 @@ function App() {
   return (
     <div>
       <Header />
-      <Wrapper className='Wrapper'>
+      <div>
         <Switch>
           {/* Designing UserProfile, adding path/props after */}
           {/* /profile path is just for testing */}
@@ -126,7 +126,7 @@ function App() {
             <Home />
           </Route>
         </Switch>
-      </Wrapper>
+      </div>
       <Footer />
     </div>
   );

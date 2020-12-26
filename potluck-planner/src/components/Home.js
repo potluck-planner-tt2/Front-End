@@ -8,19 +8,26 @@ const StyledHeroImg = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border: 2px solid white;
+  border: 2px white;
+  border-style: solid hidden;
+  margin: 5vh 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  .title {
+    font-size: 4rem;
+    padding: 10px 30px;
+    color: white;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 `;
 
 const StyledHome = styled.section`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-
-  h2 {
-    font-size: 4rem;
-    padding: 10px 0;
-  }
 
   p {
     font-size: 2rem;
@@ -36,9 +43,13 @@ const StyledHome = styled.section`
 function Home() {
   return (
     <div className='wrapper'>
-      <StyledHeroImg />
+      <StyledHeroImg>
+        <div className='title'>
+          <h2>Welcome to</h2>
+          <h2>Cookouts</h2>
+        </div>
+      </StyledHeroImg>
       <StyledHome>
-        <h2>Welcome to Cookouts!</h2>
         <div>
           <p>
             We believe that connecting with others is as important as the food
