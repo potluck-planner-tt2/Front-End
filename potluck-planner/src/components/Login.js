@@ -17,7 +17,7 @@ const { values, onChange, onSubmit, disabled, errors } = props;
 
   const changeHandler = event => {
     const { name, value } = event.target;
-    onChange(name, value)
+    onChange(name, value);
   }
 
   return (

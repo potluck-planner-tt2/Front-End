@@ -4,12 +4,20 @@ import styled from 'styled-components';
 import image from '../images/potluck_icon.jpg';
 
 const StyledHeader = styled.header`
-background: orange;
+background: linear-gradient(to bottom, #56ab2f, #a8e063);
 
 .navBar {
   display:flex;
   flex-flow:row nowrap;
   justify-content:space-between;
+  box-shadow: 0px 3px 10px 2px #2E2E2E;
+
+   h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 6rem;
+    color:white;
+    margin-left: 3%;
+  }
 }
 
 .banner {
@@ -29,7 +37,15 @@ background: orange;
 .btn {
   padding: 5px 10px;
   margin: 10px;
-  border-radius: 9999px;
+  border-radius: 7px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: black;
+  background: lightgreen;
+
+  :hover {
+    cursor: pointer;
+  }
 }
 
 // Gotta fix logo 

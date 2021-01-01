@@ -30,8 +30,11 @@ const initialMember = [];
 const initialDisabled = true;
 
 const Wrapper = styled.div`
+display:flex;
+flex-flow: column nowrap;
+justify-content: space-between;
 background: grey;
-height: 100vh;
+min-height: 100vh;
 text-align:center;
 `
 
