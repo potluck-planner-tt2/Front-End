@@ -26,7 +26,7 @@ const initialFormErrors = {
   passwordConfirm:"",
 }
 
-const initialMember =[];
+const initialMember = [];
 const initialDisabled = true;
 
 const Wrapper = styled.div`

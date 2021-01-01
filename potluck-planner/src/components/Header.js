@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import image from '../images/potluck_icon.jpg';
 
 const StyledHeader = styled.header`
 background: orange;
@@ -15,12 +16,27 @@ background: orange;
   display:flex;
   flex-flow:row nowrap;
   justify-content:flex-start;
+  align-items:center;
 }
 
 .bannerButtons {
   display:flex;
   flex-flow:row nowrap;
   justify-content:flex-end;
+  align-items:center;
+}
+
+.btn {
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 9999px;
+}
+
+// Gotta fix logo 
+.logo {
+  margin: 10px;
+  height:50px;
+  width: 50px;
 }
 `
 
@@ -33,7 +49,12 @@ function Header(props) {
       <nav className="navBar">
         <div className="banner">
           <div>
-            <Link to="/">Logo/return Home Here</Link> 
+            <Link to="/">
+              <img
+              src={image}
+              className="logo"
+              />
+              </Link> 
           </div>
           <div>
             <h1>Cookouts</h1>
