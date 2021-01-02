@@ -17,6 +17,7 @@ background: linear-gradient(to bottom, #56ab2f, #a8e063);
     font-size: 6rem;
     color:white;
     margin-left: 3%;
+    text-shadow: 3px 2px 4px rgba(0,0,0,0.6);
   }
 }
 
@@ -39,7 +40,7 @@ background: linear-gradient(to bottom, #56ab2f, #a8e063);
   margin: 10px;
   border-radius: 7px;
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 600;
   color: black;
   background: lightgreen;
 
@@ -65,6 +66,7 @@ function Header(props) {
       <nav className="navBar">
         <div className="banner">
           <div>
+            {/****** Fix logo image *****/}
             <Link to="/">
               <img
               src={image}
