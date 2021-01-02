@@ -42,7 +42,7 @@ background: linear-gradient(to bottom, #56ab2f, #a8e063);
   font-size: 1.5rem;
   font-weight: 600;
   color: black;
-  background: lightgreen;
+  background: #87ceeb;
 
   :hover {
     cursor: pointer;
@@ -54,6 +54,7 @@ background: linear-gradient(to bottom, #56ab2f, #a8e063);
   margin: 10px;
   height:50px;
   width: 50px;
+  border-radius: 50%;
 }
 `
 

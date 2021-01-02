@@ -9,7 +9,8 @@ text-align:center;
 h3 {
   font-family: 'Lobster', cursive;
   font-size: 2.5rem;
-  color:grey;
+  color:white;
+  text-shadow: 3px 2px 4px rgba(0,0,0,0.6);
 }
 
 `

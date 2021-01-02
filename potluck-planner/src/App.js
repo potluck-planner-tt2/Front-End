@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import * as yup from 'yup';
 import schema from './validation/schema';
 
+import Home from './components/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
@@ -36,6 +37,7 @@ justify-content: space-between;
 background: grey;
 min-height: 100vh;
 text-align:center;
+background:url("https://background-tiles.com/overview/white/patterns/large/1027.png");
 `
 
 function App() {
@@ -113,6 +115,9 @@ function App() {
             errors={formErrors}
             />
           </Route>
+          <Route exact path="/">
+              <Home />
+            </Route>
         </Switch>
       <div>
         <Footer/>
