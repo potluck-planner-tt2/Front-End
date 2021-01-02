@@ -11,6 +11,7 @@ background: linear-gradient(to bottom, #56ab2f, #a8e063);
   flex-flow:row nowrap;
   justify-content:space-between;
   box-shadow: 0px 3px 10px 2px #2E2E2E;
+  /* width 100% for bigger screens / chop body to 80%? play with media queries*/
 
    h1 {
     font-family: 'Lobster', cursive;
