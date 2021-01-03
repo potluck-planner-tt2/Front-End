@@ -39,7 +39,6 @@ const Wrapper = styled.div`
 display:flex;
 flex-flow: column nowrap;
 justify-content: space-between;
-background: grey;
 min-height: 100vh;
 text-align:center;
 background:url("https://background-tiles.com/overview/white/patterns/large/1027.png");
@@ -87,13 +86,9 @@ function App() {
       username:formValues.username.trim(),
       email:formValues.email.trim(),
       password:formValues.password.trim(),
-
       // Removed temporarily, interferring with login.
       // passwordConfirm:formValues.passwordConfirm.trim(),
     };
-
-
-
     // todos
     // POST new member for registration 
     // GET validate user for login
@@ -107,6 +102,7 @@ function App() {
       </div>
         <Switch>
           {/* Designing UserProfile, adding path/props after */}
+          {/* /profile path is just for testing */}
           <Route path="/profile">
             <UserProfile />
           </Route>
