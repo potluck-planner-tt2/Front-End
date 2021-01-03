@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import schema from './validation/schema';
-import axious from 'axios';
+import axios from 'axios';
 
 import Home from './components/Home';
 import Header from './components/Header';
@@ -107,7 +107,7 @@ function App() {
       </div>
         <Switch>
           {/* Designing UserProfile, adding path/props after */}
-          <Route>
+          <Route path="/profile">
             <UserProfile />
           </Route>
           <Route path="/login">
