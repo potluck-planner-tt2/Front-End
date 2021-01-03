@@ -87,7 +87,7 @@ function Header(props) {
           </div>
           <div>
             <button className="register btn"
-            onClick={()=> history.push('/registration')}>Sign Up Today!</button>
+            onClick={()=> history.push('/registration')}>Sign Up</button>
           </div>
         </div>
       </nav>

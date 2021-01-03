@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import schema from './validation/schema';
+import axious from 'axios';
 
 import Home from './components/Home';
 import Header from './components/Header';
@@ -17,7 +18,10 @@ const initialFormValues = {
   username:"",
   email:"",
   password:"",
-  passwordConfirm:"",
+  // taking out temporarily, interfers with Login.js
+  // passwordConfirm required for validation on both Registration/Login
+  // prevents login, due to empty form field, when one isn't required to login
+  // passwordConfirm:"",
 }
 
 const initialFormErrors = {
@@ -43,7 +47,7 @@ background:url("https://background-tiles.com/overview/white/patterns/large/1027.
 function App() {
   const [ formValues, setFormValues ] = useState(initialFormValues);
   const [ formErrors, setFormErrors ] = useState(initialFormErrors);
-  const [ member, setMember ] = useState(initialMember);
+  const [ newMember, setNewMember ] = useState(initialMember);
   const [ isDisabled, setIsDisabled ] = useState(initialDisabled);
 
   const onChange = ( name, value ) => {
@@ -82,8 +86,12 @@ function App() {
       username:formValues.username.trim(),
       email:formValues.email.trim(),
       password:formValues.password.trim(),
-      passwordConfirm:formValues.passwordConfirm.trim(),
+
+      // Removed temporarily, interferring with login.
+      // passwordConfirm:formValues.passwordConfirm.trim(),
     };
+
+
 
     // todos
     // POST new member for registration 

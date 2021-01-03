@@ -5,6 +5,30 @@ const StyledRegistration =styled.form`
 display:flex;
 flex-flow:column nowrap;
 align-items:center;
+font-size: 2rem;
+
+.error {
+  color:#c70000;
+}
+
+.formInput {
+  margin: 5px;
+}
+
+.registerFormBtn {
+  padding: 5px 15px;
+  margin: 10px;
+  border-radius: 7px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: black;
+  background: #56ab2f;
+  // todo adjust color based on button disabled/enabled
+
+  :hover {
+    cursor: pointer;
+  }
+}
 `
 
 
@@ -60,7 +84,9 @@ function Registration(props) {
         value={values.password1}
         />
       </label>
-      {errors.passwordConfirm && <div className="error">{errors.passwordConfirm}</div>}
+
+      {/* Removed temporarily, interferring with login. */}
+      {/* {errors.passwordConfirm && <div className="error">{errors.passwordConfirm}</div>}
       <label className="formLabel">Confirm Password:
         <input 
         type="password"
@@ -71,7 +97,7 @@ function Registration(props) {
         onChange={changeHandler}
         value={values.passwordConfirm}
         />
-      </label>
+      </label> */}
       <button className="registerFormBtn"
       type="submit"
       disabled={disabled}>Create Account</button>

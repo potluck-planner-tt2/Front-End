@@ -11,6 +11,10 @@ font-size: 2rem;
   color:#c70000;
 }
 
+.formInput {
+  margin: 5px;
+}
+
 .loginFormBtn {
   padding: 5px 15px;
   margin: 10px;
@@ -19,6 +23,7 @@ font-size: 2rem;
   font-weight: 600;
   color: black;
   background: #56ab2f;
+  // todo adjust color based on button disabled/enabled
 
   :hover {
     cursor: pointer;
