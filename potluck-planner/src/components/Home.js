@@ -6,11 +6,27 @@ const StyledHome = styled.section`
 display:flex;
 flex-flow: column nowrap;
 align-items:center;
-.hero {
-  height: 200px;
-  width: 200px;
-  background-image:url("../images/family.jpg");
+
+h2 {
+  font-size: 4rem;
+  padding: 10px 0;
 }
+
+.hero {
+  /* background-image:url("../images/family.jpg"); */
+}
+
+p {
+  font-size: 2rem;
+  line-height: 1.4;
+}
+
+
+  /* __Formatting__ */
+  /* Title */
+  /* background-image:url("../images/family.jpg"); */
+  /* Write up some more info about site features below img */
+  
 `
 
 function Home() {

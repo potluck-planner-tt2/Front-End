@@ -46,6 +46,7 @@ const { values, onChange, onSubmit, disabled, errors } = props;
 
   return (
     <StyledLogin className="loginForm" onSubmit={submitHandler}>
+      <h2>Log in!</h2>
       {errors.username && <div className="error">{errors.username}</div>}
       <label className="formLabel">Username:
         <input 

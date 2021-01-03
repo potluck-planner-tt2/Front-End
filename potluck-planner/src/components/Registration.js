@@ -29,6 +29,7 @@ font-size: 2rem;
     cursor: pointer;
   }
 }
+
 `
 
 
@@ -48,6 +49,7 @@ function Registration(props) {
 
   return (
     <StyledRegistration className="registerForm" onSubmit={submitHandler}>
+      <h2>Register now!</h2>
       {errors.username && <div className="error">{errors.username}</div>}
       <label className="formLabel">Username:
         <input 
