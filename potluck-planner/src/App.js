@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Registration from './components/Registration';
+import UserProfile from './components/UserProfile';
 
 const initialFormValues = {
   // cleanup register/login values
@@ -105,6 +106,10 @@ function App() {
         <Header />
       </div>
         <Switch>
+          {/* Designing UserProfile, adding path/props after */}
+          <Route>
+            <UserProfile />
+          </Route>
           <Route path="/login">
             <Login
             values={formValues}
