@@ -4,7 +4,7 @@ import heroBg from '../images/family.jpg';
 
 const StyledHeroImg = styled.div`
   background-image: url(${heroBg});
-  height: 40vh;
+  height: 60vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,22 +16,30 @@ const StyledHeroImg = styled.div`
   align-items: center;
 
   .title {
-    font-size: 4rem;
-    padding: 10px 30px;
+    font-size: 3rem;
+    padding: 0 30px;
+    width: 60%;
+    min-width: 395px;
     color: white;
     border: 2px solid white;
-    background-color: rgba(0, 0, 0, 0.6);
+    background: rgba(104, 120, 100, 0.7);
+    text-shadow: 2px 2px 0px #5085af;
   }
 `;
 
 const StyledHome = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+  margin: 0 auto;
+  letter-spacing: 0.7px;
+  border: 2px solid white;
+  color: #05386b;
+  background: whitesmoke;
+  width: 60%;
 
   p {
-    font-size: 2rem;
-    line-height: 1.4;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    padding: 10px;
+    font-weight: 500;
   }
 
   /* __Formatting__ */
@@ -45,23 +53,24 @@ function Home() {
     <div>
       <StyledHeroImg>
         <div className='title'>
-          <h2>Welcome to</h2>
-          <h2>Cookouts</h2>
+          <h2>Potluck planning made easy</h2>
         </div>
       </StyledHeroImg>
       <StyledHome>
-        <p>
-          We believe that connecting with others is as important as the food we
-          eat. So we decided to combine them together! Simply create an account
-          or log in to confirm your attendence or share what dish you'll be
-          bringing etc
-        </p>
-        <p>
-          Eating is as important as the people around the table blah blah. How
-          many times have you been to a potluck and there's 3 tuna cassaroles
-          --talk about foodlist. -- Talk about features such as chaning location
-          etc, bad weather etc.
-        </p>
+        <div className='bluepart'>
+          <p>
+            We believe that connecting with others is as important as the food
+            we eat. So we decided to combine them together! Simply create an
+            account or log in to confirm your attendence or share what dish
+            you'll be bringing etc
+          </p>
+          <p>
+            Eating is as important as the people around the table blah blah. How
+            many times have you been to a potluck and there's 3 tuna cassaroles
+            --talk about foodlist. -- Talk about features such as chaning
+            location etc, bad weather etc.
+          </p>
+        </div>
       </StyledHome>
     </div>
   );

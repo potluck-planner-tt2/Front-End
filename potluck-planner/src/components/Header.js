@@ -1,25 +1,30 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import image from '../images/potluck_icon.jpg';
+import logo from '../images/logo8.png';
 
 const StyledHeader = styled.header`
   /* background: linear-gradient(to bottom, #56ab2f, #a8e063); */
-  background-color: #5cdb95;
+  background-color: #687864;
 
   .navBar {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4);
+    /* box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4); */
+    border: 2px white;
+    border-style: hidden hidden solid hidden;
+    height: 110px;
     /* width 100% for bigger screens / chop body to 80%? play with media queries*/
 
     h1 {
       font-family: 'Lobster', cursive;
-      font-size: 2.8rem;
-      color: white;
-      margin-left: 3%;
-      text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.6);
+      font-size: 5rem;
+      color: #f7f9fb;
+      text-shadow: 4px 4px 0px #8fc1e3;
+    }
+    a {
+      text-decoration: none;
     }
   }
 
@@ -43,10 +48,10 @@ const StyledHeader = styled.header`
     border: none;
     border-radius: 7px;
     font-size: 1.1rem;
-    /* font-weight: 600; */
-    color: white;
+    font-weight: 500;
+    color: #f7f9fb;
     /* background: #87ceeb; */
-    background: #05386b;
+    background: #8fc1e3;
 
     :hover {
       cursor: pointer;
@@ -55,10 +60,8 @@ const StyledHeader = styled.header`
 
   // Gotta fix logo
   .logo {
-    margin: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
+    padding: 5px;
+    width: 115px;
   }
 `;
 
@@ -73,14 +76,16 @@ function Header(props) {
             {/****** Fix logo image *****/}
             <Link to='/'>
               <img
-                src={image}
+                src={logo}
                 className='logo'
                 alt='Company Logo' /*Added alt text -MJ*/
               />
             </Link>
           </div>
           <div>
-            <h1>Cookouts</h1>
+            <Link to='/'>
+              <h1>Cookouts</h1>
+            </Link>
           </div>
         </div>
         <div className='bannerButtons'>
