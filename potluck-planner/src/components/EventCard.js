@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createElement } from 'react';
 import styled from 'styled-components';
 
 const StyledEventCard = styled.div`
@@ -44,22 +44,34 @@ p {
 function EventCard(props) {
   const { name, date_time, } = props.event;
 
-  const getFoodList = event => {
+  const dummyFoodItems = ["Baked Beans","Uncle Earl's Chili",'Expired Lima Beans']
+
+  const getFoodList = (event) => {
     // axios GET call for food list of specific potluck event
     //.then const data = res.data
     // map through data add new component (list-style) under it's respective card 
     const { target } = event;
-    target.classList.add('hide');
-    //catch server err
-    
+    target.classList.add('hide')
+
+    dummyFoodItems.map(item => {
+      return foodItem(item)
+    })
+  }
+
+  const foodItem = (item)=> {
+    const foodContainer = document.querySelector(".foodContainer");
+    const div = document.createElement('div');
+    div.textContent = item;
+    foodContainer.append(div);
   }
 
   return (
     <StyledEventCard className="eventCard">
       <h4 className="title">{name}</h4>
       <p className="subtitle">Date/Time: {date_time}</p>
-      {/* add button onClick to access event details */}
       <button className="eventDetails" onClick={getFoodList}>Details</button>
+      <div className="foodContainer"></div>
+      
     </StyledEventCard>
   )
 }
