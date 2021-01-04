@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 
 const StyledLogin = styled.form`
@@ -31,23 +31,32 @@ font-size: 2rem;
 }
 `
 
-function Login(props) {
-const { values, onChange, onSubmit, disabled, errors } = props;
+const initialValues = {
+  username:"",
+  password:"",
+};
 
-  const submitHandler = event => {
+function Login(props) {
+const [ logValues, setLogValues ] = useState(initialValues);
+
+  const login = event => {
    event.preventDefault();
-   onSubmit(); 
+
+   // axios post to backend, set token to LS
+   // .then push id to url?
   }
 
   const changeHandler = event => {
     const { name, value } = event.target;
-    onChange(name, value);
+    setLogValues({
+      ...logValues,
+      [name]: value
+    }); 
   }
 
   return (
-    <StyledLogin className="loginForm" onSubmit={submitHandler}>
+    <StyledLogin className="loginForm" onSubmit={login}>
       <h2>Log in!</h2>
-      {errors.username && <div className="error">{errors.username}</div>}
       <label className="formLabel">Username:
         <input 
         type="text"
@@ -56,10 +65,9 @@ const { values, onChange, onSubmit, disabled, errors } = props;
         name='username'
         placeholder="Enter Username"
         onChange={changeHandler}
-        value={values.username}
+        value={logValues.username}
         />
       </label>
-      {errors.password && <div className="error">{errors.password}</div>}
       <label className="formLabel">Password:
         <input 
         type="password"
@@ -68,12 +76,12 @@ const { values, onChange, onSubmit, disabled, errors } = props;
         name='password'
         placeholder="Enter Password"
         onChange={changeHandler}
-        value={values.password}
+        value={logValues.password}
         />
       </label>
+      {/* Add server response error if any */}
       <button className="loginFormBtn"
       type="submit"
-      disabled={disabled}
       >Log In</button>
     </StyledLogin>
   )
