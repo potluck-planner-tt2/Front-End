@@ -106,11 +106,11 @@ function App() {
           </Route>
           <Route path='/login'>
             <Login
-              values={formValues}
-              onChange={onChange}
-              onSubmit={onSubmit}
-              disabled={isDisabled}
-              errors={formErrors}
+              // values={formValues}
+              // onChange={onChange}
+              // onSubmit={onSubmit}
+              // disabled={isDisabled}
+              // errors={formErrors}
             />
           </Route>
           <Route path='/registration'>
