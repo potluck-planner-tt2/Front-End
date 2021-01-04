@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
+import EventForm from './EventForm';
 
 // **** Using dummy Data atm **** //
 // **** Using dummy Data atm **** //
@@ -67,9 +68,11 @@ function UserProfile(props) {
   return (
     <StyledUserProfile className="userProfile">
       <div className="welcomeMsg">
+        {/* dynamically add username */}
         <h2>Welcome back, _username_</h2>
       </div>
       <div>
+        {/* keep Upcoming Events unmounted until they have events */}
         <h3 className="eventMsg">Upcoming Events</h3>
       </div>
       <div className="eventCardContainer">
@@ -82,11 +85,17 @@ function UserProfile(props) {
         })}
       </div>
       <div>
-        {/* Add Link/NavLink to button */}
+        {/* Add nested Link/NavLink to EventForm */}
         {/* <Link> */}
         <button className="newEventBtn">Create A New Event!</button>
         {/* </Link> */}
       </div>
+      <div>
+        {/* _nested_ <Route> */}
+        <EventForm />
+        {/* </Route> */}
+      </div>
+        
     </StyledUserProfile>
   )
 }
