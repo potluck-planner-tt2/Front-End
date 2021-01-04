@@ -25,6 +25,8 @@ const initialFormValues = {
   // passwordConfirm:"",
 };
 
+// testing git branch *****************************************
+
 const initialFormErrors = {
   username: '',
   email: '',
