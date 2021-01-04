@@ -36,17 +36,30 @@ p {
   }
 }
 
+.hide {
+  display:none;
+}
 `
 
 function EventCard(props) {
-  const { name, date_time } = props.event;
+  const { name, date_time, } = props.event;
+
+  const getFoodList = event => {
+    // axios GET call for food list of specific potluck event
+    //.then const data = res.data
+    // map through data add new component (list-style) under it's respective card 
+    const { target } = event;
+    target.classList.add('hide');
+    //catch server err
+    
+  }
 
   return (
     <StyledEventCard className="eventCard">
       <h4 className="title">{name}</h4>
       <p className="subtitle">Date/Time: {date_time}</p>
       {/* add button onClick to access event details */}
-      <button className="eventDetails">Details</button>
+      <button className="eventDetails" onClick={getFoodList}>Details</button>
     </StyledEventCard>
   )
 }
