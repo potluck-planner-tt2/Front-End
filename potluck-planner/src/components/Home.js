@@ -9,6 +9,7 @@ const StyledHeroImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border: 2px solid white;
+
 `;
 
 const StyledHome = styled.section`
