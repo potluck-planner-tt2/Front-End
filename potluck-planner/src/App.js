@@ -3,13 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import schema from './validation/schema';
-import axious from 'axios';
+import axios from 'axios';
 
 import Home from './components/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Registration from './components/Registration';
+import UserProfile from './components/UserProfile';
 
 const initialFormValues = {
   // cleanup register/login values
@@ -38,7 +39,6 @@ const Wrapper = styled.div`
 display:flex;
 flex-flow: column nowrap;
 justify-content: space-between;
-background: grey;
 min-height: 100vh;
 text-align:center;
 background:url("https://background-tiles.com/overview/white/patterns/large/1027.png");
@@ -86,13 +86,9 @@ function App() {
       username:formValues.username.trim(),
       email:formValues.email.trim(),
       password:formValues.password.trim(),
-
       // Removed temporarily, interferring with login.
       // passwordConfirm:formValues.passwordConfirm.trim(),
     };
-
-
-
     // todos
     // POST new member for registration 
     // GET validate user for login
@@ -105,6 +101,11 @@ function App() {
         <Header />
       </div>
         <Switch>
+          {/* Designing UserProfile, adding path/props after */}
+          {/* /profile path is just for testing */}
+          <Route path="/profile">
+            <UserProfile />
+          </Route>
           <Route path="/login">
             <Login
             values={formValues}
