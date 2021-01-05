@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { axiosDev } from '../utils/axiosDev';
 
@@ -40,19 +41,22 @@ const initialValues = {
 function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
 
+let history = useHistory();
+const { id } = useParams();
+
   const login = event => {
    event.preventDefault();
 
    axiosDev().post('/api/auth/login', logValues)
    .then(res => {
      window.localStorage.setItem("token", res.data.token)
-     setLogValues(initialValues);
+     history.push(`/profile/${res.data.id}`)
      console.log(res.data.token)
    })
    .catch(err => {
     console.log(err)
    }) 
-  
+   setLogValues(initialValues);
   }
 
   const changeHandler = event => {
