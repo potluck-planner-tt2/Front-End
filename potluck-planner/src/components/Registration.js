@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
   width: 40%;
   color: #f7f9fb;
   font-family: droid-sans, sans-serif;
+  border: 2px solid white;
 
   h2 {
     font-size: 4.5rem;
@@ -61,13 +62,23 @@ const StyledRegistration = styled.form`
     background: #8fc1e3;
   }
 
-  .btn:focus {
-    box-shadow: 0 0 0 2px #8fc1e3;
+  .btn:hover {
+    box-shadow: 0 0 0 2px #f7f9fb;
+    outline: white;
   }
-  .btn:disabled,
-  .btn[disabled] {
+
+  .btn:focus {
+    box-shadow: 0 0 0 2px #f7f9fb;
+    outline: white;
+  }
+
+  .btn:disabled {
     background-color: #cccccc;
     color: #666666;
+    :hover {
+      box-shadow: 0 0 0 0px #f7f9fb;
+      outline: white;
+    }
   }
 `;
 

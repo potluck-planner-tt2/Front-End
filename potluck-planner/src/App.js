@@ -91,6 +91,7 @@ function App() {
       password: formValues.password,
     };
     postNewMember(newMember);
+    setFormValues(initialFormValues);
   };
 
   return (
