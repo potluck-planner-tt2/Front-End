@@ -19,10 +19,12 @@ const StyledHeader = styled.header`
 
     h1 {
       font-family: 'Lobster', cursive;
-      font-size: 5rem;
+      font-size: 5.4rem;
       color: #f7f9fb;
       text-shadow: 4px 4px 0px #8fc1e3;
+      transition: 0.5s;
     }
+
     a {
       text-decoration: none;
     }
@@ -50,18 +52,23 @@ const StyledHeader = styled.header`
     font-size: 1.1rem;
     font-weight: 500;
     color: #f7f9fb;
-    /* background: #87ceeb; */
     background: #8fc1e3;
-
-    :hover {
-      cursor: pointer;
-    }
   }
 
-  // Gotta fix logo
   .logo {
     padding: 5px;
     width: 115px;
+  }
+
+  @media (max-width: 600px) {
+    .navBar h1 {
+      font-size: 3.2rem;
+    }
+
+    .logo {
+      padding: 5px;
+      width: 75px;
+    }
   }
 `;
 

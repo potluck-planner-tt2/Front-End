@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-  background: linear-gradient(to top, #56ab2f, #a8e063);
-  box-shadow: 0px -3px 5px 2px rgba(0, 0, 0, 0.4);
+  background-color: #687864;
   text-align: center;
   width: 100%;
+  height: 7vh;
 
   h3 {
     font-family: 'Lobster', cursive;
     font-size: 2.5rem;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    text-shadow: 2.2px 2.2px 0px #8fc1e3;
   }
 `;
 
