@@ -82,8 +82,13 @@ function App() {
         setMembers([res.data, ...members]);
         setFormValues(initialFormValues);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (error.response.status === 500) {
+          console.log(error);
+        } else {
+          alert(error.response.data);
+          console.log(error);
+        }
       });
   };
 
