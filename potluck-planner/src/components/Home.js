@@ -1,59 +1,99 @@
 import React from 'react';
 import styled from 'styled-components';
-import heroBg from '../images/family.jpg';
+import HeroImage from './HeroImage';
+import bullet from '../images/bullet.png';
 
-const StyledHeroImg = styled.div`
-  background-image: url(${heroBg});
-  height: 40vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+const StyledAbout = styled.div`
+  margin: 0 auto;
+
   border: 2px solid white;
-
-`;
-
-const StyledHome = styled.section`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+  color: #f7f9fb;
+  background: #687864;
+  width: 60%;
+  margin-bottom: 5vh;
+  padding: 10px;
 
   h2 {
-    font-size: 4rem;
-    padding: 10px 0;
+    font-size: 3.5rem;
+    font-family: 'Lobster', cursive;
+    margin: 3vh 0;
+    text-shadow: 3.5px 3.5px 0px #8fc1e3;
   }
 
   p {
-    font-size: 2rem;
-    line-height: 1.4;
+    font-size: 1.4rem;
+    font-family: droid-sans, sans-serif;
+    line-height: 1.2;
+    padding: 0 10px 10px 10px;
+    font-weight: 500;
   }
 
-  /* __Formatting__ */
-  /* Title */
-  /* background-image:url("../images/family.jpg"); */
-  /* Write up some more info about site features below img */
+  .bluebar {
+    height: 3px;
+    width: 75%;
+    margin: 0 auto;
+    background-color: #8fc1e3;
+  }
+
+  .listContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  ul {
+    list-style-image: url(${bullet});
+    padding-inline-start: 1ch;
+    width: 70%;
+    margin: 20px 0px;
+    margin-bottom: 0;
+  }
+
+  li {
+    padding: 10px;
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+  }
 `;
 
 function Home() {
   return (
-    <div className='wrapper'>
-      <StyledHeroImg />
-      <StyledHome>
-        <h2>Welcome to Cookouts!</h2>
-        <div>
-          <p>
-            We believe that connecting with others is as important as the food
-            we eat. So we decided to combine them together! Simply create an
-            account or log in to confirm your attendence or share what dish
-            you'll be bringing etc
-          </p>
-          <p>
-            Eating is as important as the people around the table blah blah. How
-            many times have you been to a potluck and there's 3 tuna cassaroles
-            --talk about foodlist. -- Talk about features such as chaning
-            location etc, bad weather etc.
-          </p>
-        </div>
-      </StyledHome>
+    <div>
+      <HeroImage />
+      <StyledAbout>
+        <h2>About us</h2>
+        <p>
+          Here at Cookouts we believe the people you surround yourself with are
+          as important as the food you fill yourself with and there is no better
+          way to combine the two than with a potluck!
+        </p>
+        <p>
+          Our goal was to create a way for ANYONE to easily organize their own
+          potluck without having to deal with the most common issues involved in
+          the planning. <br />
+          Say goodbye to duplicate dishes!
+        </p>
+        <div className='bluebar' />
+        <p>
+          Some of the wonderful features you will have access too upon signing
+          up include:
+          <div className='listContainer'>
+            <ul>
+              <li>
+                Quickly schedule a new potluck and invite your friends! They can
+                even confirm if they're coming!
+              </li>
+              <li>
+                Create a food list! Friends can mark off items they would like
+                to bring, no more confusion!
+              </li>
+              <li>
+                Easily notify all your friends of any changes to the when and
+                where! They will never miss a beet!
+              </li>
+            </ul>
+          </div>
+        </p>
+      </StyledAbout>
     </div>
   );
 }
