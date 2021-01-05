@@ -69,8 +69,6 @@ function UserProfile(props) {
   let match = useRouteMatch();
   let history = useHistory();
 
-  console.log(match)
-
   return (
     <StyledUserProfile className="userProfile">
       <div className="welcomeMsg">

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { axiosDev } from '../utils/axiosDev';
+import axios from 'axios';
 
 const StyledLogin = styled.form`
 display:flex;
@@ -44,21 +45,34 @@ const [ logValues, setLogValues ] = useState(initialValues);
 let history = useHistory();
 const { id } = useParams();
 
+
   const login = event => {
    event.preventDefault();
 
    axiosDev().post('/api/auth/login', logValues)
    .then(res => {
      window.localStorage.setItem("token", res.data.token)
-     // push to /profile/user id --- api not sending user_id, only message/token
-     history.push(`/profile/${res.data.user_id}`);
-     console.log(res.data)
+     console.log(res)
+     getUser();
    })
    .catch(err => {
     console.log(err)
    }) 
+   // get request and history.push on success
    setLogValues(initialValues);
   }
+
+  const getUser = () => {
+    axiosDev().get('https://pl-planner.herokuapp.com/api/users')
+   .then(res => {
+     console.log(res.data);
+      res.data.map(user => {
+        if(user.username === logValues.username) {
+          history.push(`/profile/${user.user_id}`);
+        }
+      })
+   })
+   }
 
   const changeHandler = event => {
     const { name, value } = event.target;
