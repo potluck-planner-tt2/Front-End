@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import axios from 'axios';
 
 const StyledLogin = styled.form`
 display:flex;
@@ -36,14 +37,32 @@ const initialValues = {
   password:"",
 };
 
+export const axiosDev = () => {
+  const token = window.localStorage.getItem('token')
+  return axios.create({
+      headers: {
+          authorization: token
+      },
+      baseURL: 'https://pl-planner.herokuapp.com'
+  })
+}
+
 function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
 
   const login = event => {
    event.preventDefault();
 
-   // axios post to backend, set token to LS
-   // .then push id to url?
+   axiosDev().post('/api/auth/login', logValues)
+   .then(res => {
+     window.localStorage.setItem("token", res.data.token)
+     setLogValues(initialValues);
+     console.log(res.data.token)
+   })
+   .catch(err => {
+    console.log(err)
+   }) 
+  
   }
 
   const changeHandler = event => {
