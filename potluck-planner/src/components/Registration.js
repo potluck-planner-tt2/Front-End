@@ -99,7 +99,7 @@ function Registration(props) {
             name='password'
             placeholder='Enter Password'
             onChange={changeHandler}
-            value={values.password1}
+            value={values.password}
           />
         </label>
         <button className='registerFormBtn' type='submit' disabled={disabled}>
