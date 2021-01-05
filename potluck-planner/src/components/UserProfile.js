@@ -95,7 +95,6 @@ function UserProfile(props) {
         <EventForm />
         {/* </Route> */}
       </div>
-        
     </StyledUserProfile>
   )
 }
