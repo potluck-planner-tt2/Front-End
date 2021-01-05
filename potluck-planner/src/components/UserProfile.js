@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, useRouteMatch, useParams, useHistory } from 'react-router-dom';
+import { NavLink, Route, useRouteMatch, useParams, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
@@ -68,6 +68,8 @@ function UserProfile(props) {
   let { id } = useParams();
   let match = useRouteMatch();
   let history = useHistory();
+  let location = useLocation();
+
 
   return (
     <StyledUserProfile className="userProfile">
@@ -89,10 +91,9 @@ function UserProfile(props) {
         })}
       </div>
       <div>
-        {/* Add nested Link/NavLink to EventForm */}
-        <Link to={`${match.url}/${id}/newpotluck`}>
+        <NavLink to={`${match.url}/${id}/newpotluck`}>
         <button className="newEventBtn">Create A New Event!</button>
-        </Link>
+        </NavLink>
       </div>
       <div>
         <Route path={`${match.url}/${id}/newpotluck`}>
