@@ -96,7 +96,7 @@ function UserProfile(props) {
         </NavLink>
       </div>
       <div>
-        <Route path={`${match.url}/${id}/newpotluck`}>
+        <Route path={`${match.url}/:id/newpotluck`}>
           <EventForm />
         </Route>
       </div>

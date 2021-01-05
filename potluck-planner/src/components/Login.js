@@ -52,7 +52,6 @@ const { id } = useParams();
    axiosDev().post('/api/auth/login', logValues)
    .then(res => {
      window.localStorage.setItem("token", res.data.token)
-     console.log(res)
      getUser();
    })
    .catch(err => {
@@ -65,7 +64,6 @@ const { id } = useParams();
   const getUser = () => {
     axiosDev().get('https://pl-planner.herokuapp.com/api/users')
    .then(res => {
-     console.log(res.data);
       res.data.map(user => {
         if(user.username === logValues.username) {
           history.push(`/profile/${user.user_id}`);
