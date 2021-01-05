@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { axiosDev } from '../utils/axiosDev';
 
 const StyledLogin = styled.form`
 display:flex;
@@ -36,14 +37,23 @@ const initialValues = {
   password:"",
 };
 
+
 function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
 
   const login = event => {
    event.preventDefault();
 
-   // axios post to backend, set token to LS
-   // .then push id to url?
+   axiosDev().post('/api/auth/login', logValues)
+   .then(res => {
+     window.localStorage.setItem("token", res.data.token)
+     setLogValues(initialValues);
+     console.log(res.data.token)
+   })
+   .catch(err => {
+    console.log(err)
+   }) 
+  
   }
 
   const changeHandler = event => {
