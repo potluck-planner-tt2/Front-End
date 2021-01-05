@@ -57,6 +57,7 @@ function EventCard(props) {
     const { target } = event;
     target.classList.add('hide')
 
+    // map into new component to pass userid/foodid props?
     dummyFoodItems.map(item => {
       return foodItem(item)
     })
@@ -68,6 +69,7 @@ function EventCard(props) {
     div.classList.add('foodItem')
     div.textContent = item;
     div.addEventListener('click', () => {
+      // working
       console.log("food item")
     })
     foodContainer.append(div);
