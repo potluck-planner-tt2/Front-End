@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, useRouteMatch, useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
 import EventForm from './EventForm';
+
 
 // **** Using dummy Data atm **** //
 // **** Using dummy Data atm **** //
@@ -64,6 +65,11 @@ h3 {
 `
 
 function UserProfile(props) {
+  let { id } = useParams();
+  let match = useRouteMatch();
+  let history = useHistory();
+
+  console.log(match)
 
   return (
     <StyledUserProfile className="userProfile">
@@ -86,16 +92,15 @@ function UserProfile(props) {
       </div>
       <div>
         {/* Add nested Link/NavLink to EventForm */}
-        {/* <Link> */}
+        <Link to={`${match.url}/${id}/newpotluck`}>
         <button className="newEventBtn">Create A New Event!</button>
-        {/* </Link> */}
+        </Link>
       </div>
       <div>
-        {/* _nested_ <Route> */}
-        <EventForm />
-        {/* </Route> */}
+        <Route path={`${match.url}/${id}/newpotluck`}>
+          <EventForm />
+        </Route>
       </div>
-        
     </StyledUserProfile>
   )
 }

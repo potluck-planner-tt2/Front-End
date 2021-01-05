@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledEventCard = styled.div`
@@ -90,7 +90,6 @@ function EventCard(props) {
       <p className="subtitle">Date/Time: {date_time}</p>
       <button className="eventDetails" onClick={getFoodList}>Details</button>
       <div className="foodContainer"></div>
-      
     </StyledEventCard>
   )
 }
