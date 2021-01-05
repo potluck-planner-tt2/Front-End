@@ -31,11 +31,14 @@ const initialDisabled = true;
 
 const Wrapper = styled.div`
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  min-height: 100vh;
+  flex-direction: column;
+  min-height: 93vh;
   text-align: center;
   background: url('https://background-tiles.com/overview/white/patterns/large/1027.png');
+
+  .foot {
+    align-self: flex-end;
+  }
 `;
 
 function App() {
@@ -86,8 +89,8 @@ function App() {
 
   return (
     <div>
-      <Header />
-      <Wrapper className='Wrapper'>
+      <Wrapper>
+        <Header />
         <Switch>
           {/* Designing UserProfile, adding path/props after */}
           {/* /profile path is just for testing */}

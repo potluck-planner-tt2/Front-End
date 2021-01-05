@@ -1,24 +1,32 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import image from '../images/potluck_icon.jpg';
+import logo from '../images/logo8.png';
 
 const StyledHeader = styled.header`
-  background: linear-gradient(to bottom, #56ab2f, #a8e063);
+  /* background: linear-gradient(to bottom, #56ab2f, #a8e063); */
+  background-color: #687864;
 
   .navBar {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    box-shadow: 0px 3px 10px 2px #2e2e2e;
+    /* box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4); */
+    border: 2px white;
+    border-style: hidden hidden solid hidden;
+    height: 110px;
     /* width 100% for bigger screens / chop body to 80%? play with media queries*/
 
     h1 {
       font-family: 'Lobster', cursive;
-      font-size: 6rem;
-      color: white;
-      margin-left: 3%;
-      text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.6);
+      font-size: 5.4rem;
+      color: #f7f9fb;
+      text-shadow: 4px 4px 0px #8fc1e3;
+      transition: 0.3s;
+    }
+
+    a {
+      text-decoration: none;
     }
   }
 
@@ -37,25 +45,47 @@ const StyledHeader = styled.header`
   }
 
   .btn {
-    padding: 5px 10px;
+    padding: 10px 15px;
+    width: 90px;
     margin: 10px;
+    border: none;
     border-radius: 7px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: black;
-    background: #87ceeb;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #f7f9fb;
+    background: #8fc1e3;
+  }
 
-    :hover {
-      cursor: pointer;
+  .btn:focus {
+    box-shadow: 0 0 0 2px #8fc1e3;
+  }
+
+  .logo {
+    padding: 5px;
+    width: 115px;
+    transition: 0.3s;
+  }
+
+  @media (max-width: 700px) {
+    .bannerButtons {
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    .btn {
+      margin: 0px 10px;
     }
   }
 
-  // Gotta fix logo
-  .logo {
-    margin: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
+  @media (max-width: 600px) {
+    .navBar h1 {
+      font-size: 4rem;
+    }
+
+    .logo {
+      padding: 5px;
+      width: 90px;
+    }
   }
 `;
 
@@ -63,21 +93,23 @@ function Header(props) {
   const history = useHistory();
 
   return (
-    <StyledHeader className='header'>
+    <StyledHeader>
       <nav className='navBar'>
         <div className='banner'>
           <div>
             {/****** Fix logo image *****/}
             <Link to='/'>
               <img
-                src={image}
+                src={logo}
                 className='logo'
                 alt='Company Logo' /*Added alt text -MJ*/
               />
             </Link>
           </div>
           <div>
-            <h1>Cookouts</h1>
+            <Link to='/'>
+              <h1>Cookouts</h1>
+            </Link>
           </div>
         </div>
         <div className='bannerButtons'>
