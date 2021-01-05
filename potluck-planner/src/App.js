@@ -83,7 +83,6 @@ function App() {
         setFormValues(initialFormValues);
       })
       .catch((err) => {
-        alert('Username is already taken');
         console.log(err);
       });
   };

@@ -6,11 +6,12 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   margin: auto;
   background-color: #687864;
-  min-height: 50vh;
-  width: 40%;
+  height: 50vh;
+  width: 600px;
   color: #f7f9fb;
   font-family: droid-sans, sans-serif;
   border: 2px solid white;
+  transition: 0.3s;
 
   h2 {
     font-size: 4.5rem;
@@ -22,6 +23,18 @@ const StyledWrapper = styled.div`
     margin: 30px;
     font-size: 1.3rem;
   }
+
+  @media (max-width: 650px) {
+    width: 400px;
+
+    h2 {
+      font-size: 3.5rem;
+    }
+
+    .error {
+      font-size: 1.1rem;
+    }
+  }
 `;
 
 const StyledRegistration = styled.form`
@@ -30,10 +43,7 @@ const StyledRegistration = styled.form`
   align-items: center;
   font-size: 1.6rem;
   text-shadow: 1.5px 0.5px 0px #5085a5;
-
-  .error {
-    color: #c70000;
-  }
+  transition: 0.3s;
 
   .formInput {
     margin: 5px;
@@ -78,6 +88,15 @@ const StyledRegistration = styled.form`
     :hover {
       box-shadow: 0 0 0 0px #f7f9fb;
       outline: white;
+    }
+  }
+  @media (max-width: 650px) {
+    font-size: 1.5rem;
+
+    .btn {
+      font-size: 1rem;
+      font-weight: 500;
+      width: 150px;
     }
   }
 `;
