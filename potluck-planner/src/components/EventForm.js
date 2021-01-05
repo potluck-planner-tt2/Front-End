@@ -62,7 +62,7 @@ function EventForm(props) {
 
   return (
     <StyledEventForm className="eventForm" onSubmit={submitHandler}>
-      <h3>Create New Event! (Testing while hard coded atm)</h3>
+      <h3>Create New Event!</h3>
       <label className="formLabel">Event Name:
         <input 
         type="text"
