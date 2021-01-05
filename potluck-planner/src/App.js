@@ -14,16 +14,16 @@ import UserProfile from './components/UserProfile';
 
 const initialFormValues = {
   username: '',
-  email: '',
+  // email: '',
   password: '',
-  passwordConfirm: '',
+  // passwordConfirm: '',
 };
 
 const initialFormErrors = {
   username: '',
-  email: '',
+  // email: '',
   password: '',
-  passwordConfirm: '',
+  // passwordConfirm: '',
 };
 
 const initialMembers = [];
