@@ -68,6 +68,8 @@ function UserProfile(props) {
   let { id } = useParams();
   let match = useRouteMatch();
 
+  console.log(match)
+
   return (
     <StyledUserProfile className="userProfile">
       <div className="welcomeMsg">
@@ -89,12 +91,12 @@ function UserProfile(props) {
       </div>
       <div>
         {/* Add nested Link/NavLink to EventForm */}
-        <Link to={`${id}/newpotluck`}>
+        <Link to={`${match.url}/${id}/newpotluck`}>
         <button className="newEventBtn">Create A New Event!</button>
         </Link>
       </div>
       <div>
-        <Route path={`${match}/${id}/newpotluck`}>
+        <Route path={`${match.url}/${id}/newpotluck`}>
           <EventForm />
         </Route>
       </div>
