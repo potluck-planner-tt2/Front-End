@@ -14,19 +14,19 @@ import UserProfile from './components/UserProfile';
 
 const initialFormValues = {
   username: '',
-  email: '',
+  // email: '',
   password: '',
-  passwordConfirm:"",
+  // passwordConfirm: '',
 };
 
 const initialFormErrors = {
   username: '',
-  email: '',
+  // email: '',
   password: '',
-  passwordConfirm: '',
+  // passwordConfirm: '',
 };
 
-const initialMember = [];
+const initialMembers = [];
 const initialDisabled = true;
 
 const Wrapper = styled.div`
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [newMember, setNewMember] = useState(initialMember);
+  const [members, setMembers] = useState(initialMembers);
   const [isDisabled, setIsDisabled] = useState(initialDisabled);
 
   const onChange = (name, value) => {
@@ -75,16 +75,30 @@ function App() {
     });
   }, [formValues]);
 
+  const postNewMember = (newMember) => {
+    axios
+      .post('https://pl-planner.herokuapp.com/api/auth/register', newMember)
+      .then((res) => {
+        setMembers([res.data, ...members]);
+        setFormValues(initialFormValues);
+      })
+      .catch((error) => {
+        if (error.response.status === 500) {
+          console.log(error);
+        } else {
+          alert(error.response.data);
+          console.log(error);
+        }
+      });
+  };
+
   const onSubmit = () => {
     const newMember = {
       username: formValues.username.trim(),
-      email: formValues.email.trim(),
-      password: formValues.password.trim(),
-      // maybe need passwordConfirm sent to back end?
-      // passwordConfirm:formValues.passwordConfirm.trim(),
+      password: formValues.password,
     };
-    // axios POST newMember
-    // set formvalues to initial
+    postNewMember(newMember);
+    setFormValues(initialFormValues);
   };
 
   return (
@@ -98,8 +112,7 @@ function App() {
             <UserProfile />
           </Route>
           <Route path='/login'>
-            <Login
-            />
+            <Login />
           </Route>
           <Route path='/registration'>
             <Registration
