@@ -13,19 +13,11 @@ import Registration from './components/Registration';
 import UserProfile from './components/UserProfile';
 
 const initialFormValues = {
-  // cleanup register/login values
-  // cant login without password confirmation value from registration.js
-  // make separate state for login/register form values
   username: '',
   email: '',
   password: '',
-  // taking out temporarily, interfers with Login.js
-  // passwordConfirm required for validation on both Registration/Login
-  // prevents login, due to empty form field, when one isn't required to login
-  // passwordConfirm:"",
+  passwordConfirm:"",
 };
-
-// testing git branch *****************************************
 
 const initialFormErrors = {
   username: '',
@@ -85,16 +77,14 @@ function App() {
 
   const onSubmit = () => {
     const newMember = {
-      // Adjust/ make new for login/register
       username: formValues.username.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
-      // Removed temporarily, interferring with login.
+      // maybe need passwordConfirm sent to back end?
       // passwordConfirm:formValues.passwordConfirm.trim(),
     };
-    // todos
-    // POST new member for registration
-    // GET validate user for login
+    // axios POST newMember
+    // set formvalues to initial
   };
 
   return (
@@ -109,11 +99,6 @@ function App() {
           </Route>
           <Route path='/login'>
             <Login
-              values={formValues}
-              onChange={onChange}
-              onSubmit={onSubmit}
-              disabled={isDisabled}
-              errors={formErrors}
             />
           </Route>
           <Route path='/registration'>

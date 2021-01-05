@@ -86,9 +86,7 @@ function Registration(props) {
         value={values.password1}
         />
       </label>
-
-      {/* Removed temporarily, interferring with login. */}
-      {/* {errors.passwordConfirm && <div className="error">{errors.passwordConfirm}</div>}
+      {errors.passwordConfirm && <div className="error">{errors.passwordConfirm}</div>}
       <label className="formLabel">Confirm Password:
         <input 
         type="password"
@@ -99,7 +97,7 @@ function Registration(props) {
         onChange={changeHandler}
         value={values.passwordConfirm}
         />
-      </label> */}
+      </label>
       <button className="registerFormBtn"
       type="submit"
       disabled={disabled}>Create Account</button>
