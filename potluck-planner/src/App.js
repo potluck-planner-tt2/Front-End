@@ -98,7 +98,7 @@ function App() {
             <UserProfile />
           </Route>
           <Route path='/login'>
-            <Login
+            <Login 
             />
           </Route>
           <Route path='/registration'>

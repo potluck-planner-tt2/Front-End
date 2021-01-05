@@ -50,8 +50,9 @@ const { id } = useParams();
    axiosDev().post('/api/auth/login', logValues)
    .then(res => {
      window.localStorage.setItem("token", res.data.token)
-     history.push(`/profile/${res.data.id}`)
-     console.log(res.data.token)
+     // push to /profile/user id --- api not sending user_id, only message/token
+     history.push(`/profile/${res.data.user_id}`);
+     console.log(res.data)
    })
    .catch(err => {
     console.log(err)
