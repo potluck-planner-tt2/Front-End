@@ -82,7 +82,10 @@ function App() {
         setMembers([res.data, ...members]);
         setFormValues(initialFormValues);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert('Username is already taken');
+        console.log(err);
+      });
   };
 
   const onSubmit = () => {

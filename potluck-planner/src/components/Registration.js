@@ -96,7 +96,7 @@ function Registration(props) {
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className='formWrapper'>
       <h2>Register:</h2>
       <StyledRegistration onSubmit={submitHandler}>
         <label>
