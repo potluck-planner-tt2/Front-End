@@ -11,7 +11,7 @@ const StyledFooter = styled.footer`
     font-family: 'Lobster', cursive;
     font-size: 2.5rem;
     color: white;
-    text-shadow: 2.2px 2.2px 0px #8fc1e3;
+    text-shadow: 2px 2px 0px #8fc1e3;
   }
 `;
 

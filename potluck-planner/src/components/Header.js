@@ -22,7 +22,7 @@ const StyledHeader = styled.header`
       font-size: 5.4rem;
       color: #f7f9fb;
       text-shadow: 4px 4px 0px #8fc1e3;
-      transition: 0.5s;
+      transition: 0.3s;
     }
 
     a {
@@ -46,6 +46,7 @@ const StyledHeader = styled.header`
 
   .btn {
     padding: 10px 15px;
+    width: 90px;
     margin: 10px;
     border: none;
     border-radius: 7px;
@@ -55,19 +56,35 @@ const StyledHeader = styled.header`
     background: #8fc1e3;
   }
 
+  .btn:focus {
+    box-shadow: 0 0 0 2px #8fc1e3;
+  }
+
   .logo {
     padding: 5px;
     width: 115px;
+    transition: 0.3s;
+  }
+
+  @media (max-width: 700px) {
+    .bannerButtons {
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    .btn {
+      margin: 0px 10px;
+    }
   }
 
   @media (max-width: 600px) {
     .navBar h1 {
-      font-size: 3.2rem;
+      font-size: 4rem;
     }
 
     .logo {
       padding: 5px;
-      width: 75px;
+      width: 90px;
     }
   }
 `;
