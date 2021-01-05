@@ -43,6 +43,10 @@ p {
 .hide {
   display:none;
 }
+
+.strike {
+  text-decoration:line-through;
+}
 `
 
 function EventCard(props) {
@@ -63,15 +67,20 @@ function EventCard(props) {
     })
   }
 
+  // working on if item is already being brought, the text will show strike-through and label it with its cook
+
   const foodItem = (item)=> {
     const foodContainer = document.querySelector(".foodContainer");
     const div = document.createElement('div');
     div.classList.add('foodItem')
     div.textContent = item;
-    div.addEventListener('click', () => {
-      // working
-      console.log("food item")
-    })
+    div.addEventListener('click', (event) => {
+      event.target.classList.toggle("strike");
+      const span = document.createElement('span');
+      span.classList.toggle('cook');
+      span.textContent = `Brought by __username__`;
+      div.parentNode.insertBefore(span, div.nextSibling);
+    },{once:true})
     foodContainer.append(div);
   }
 
