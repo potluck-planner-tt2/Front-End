@@ -36,6 +36,10 @@ p {
   }
 }
 
+.foodItem {
+  font-size: 1.5rem;
+}
+
 .hide {
   display:none;
 }
@@ -61,7 +65,11 @@ function EventCard(props) {
   const foodItem = (item)=> {
     const foodContainer = document.querySelector(".foodContainer");
     const div = document.createElement('div');
+    div.classList.add('foodItem')
     div.textContent = item;
+    div.addEventListener('click', () => {
+      console.log("food item")
+    })
     foodContainer.append(div);
   }
 
