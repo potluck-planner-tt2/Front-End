@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import { axiosDev } from '../utils/axiosDev';
 
 const StyledLogin = styled.form`
 display:flex;
@@ -37,15 +37,6 @@ const initialValues = {
   password:"",
 };
 
-export const axiosDev = () => {
-  const token = window.localStorage.getItem('token')
-  return axios.create({
-      headers: {
-          authorization: token
-      },
-      baseURL: 'https://pl-planner.herokuapp.com'
-  })
-}
 
 function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
