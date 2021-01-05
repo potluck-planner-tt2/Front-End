@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, useRouteMatch, useParams } from 'react-router-dom';
+import { Link, Route, useRouteMatch, useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
@@ -67,6 +67,7 @@ h3 {
 function UserProfile(props) {
   let { id } = useParams();
   let match = useRouteMatch();
+  let history = useHistory();
 
   console.log(match)
 
