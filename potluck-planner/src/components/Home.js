@@ -77,6 +77,7 @@ const StyledAbout = styled.div`
   li {
     padding: 10px;
     font-size: 1.3rem;
+    letter-spacing: 0.1rem;
   }
 
   /* __Formatting__ */
