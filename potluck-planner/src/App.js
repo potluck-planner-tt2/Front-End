@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
@@ -11,6 +11,9 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import UserProfile from './components/UserProfile';
+import UserContext from './contexts/UserContext'
+import contextUser from './contexts/contextUser'
+
 
 const initialFormValues = {
   username: '',
@@ -42,10 +45,11 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [members, setMembers] = useState(initialMembers);
-  const [isDisabled, setIsDisabled] = useState(initialDisabled);
+  const [ formValues, setFormValues ] = useState(initialFormValues)
+  const [ formErrors, setFormErrors ] = useState(initialFormErrors)
+  const [ members, setMembers ] = useState(initialMembers)
+  const [ isDisabled, setIsDisabled ] = useState(initialDisabled)
+  const [ currentUser, setCurrentUser ] = useState(useContext(UserContext))
 
   const onChange = (name, value) => {
     yup
@@ -54,54 +58,62 @@ function App() {
       .then(() => {
         setFormErrors({
           ...formErrors,
-          [name]: '',
-        });
+          [ name ]: '',
+        })
       })
       .catch((err) => {
         setFormErrors({
           ...formErrors,
-          [name]: err.errors[0],
-        });
-      });
+          [ name ]: err.errors[ 0 ],
+        })
+      })
     setFormValues({
       ...formValues,
-      [name]: value,
-    });
-  };
+      [ name ]: value,
+    })
+  }
 
   useEffect(() => {
     schema.isValid(formValues).then((valid) => {
-      setIsDisabled(!valid);
-    });
-  }, [formValues]);
+      setIsDisabled(!valid)
+    })
+  }, [ formValues ])
 
   const postNewMember = (newMember) => {
     axios
       .post('https://pl-planner.herokuapp.com/api/auth/register', newMember)
       .then((res) => {
-        setMembers([res.data, ...members]);
-        setFormValues(initialFormValues);
+        setMembers([ res.data, ...members ])
+        setFormValues(initialFormValues)
       })
       .catch((error) => {
         if (error.response.status === 500) {
-          console.log(error);
+          console.log(error)
         } else {
-          alert(error.response.data);
-          console.log(error);
+          alert(error.response.data)
+          console.log(error)
         }
-      });
-  };
+      })
+  }
 
   const onSubmit = () => {
     const newMember = {
       username: formValues.username.trim(),
       password: formValues.password,
-    };
-    postNewMember(newMember);
-    setFormValues(initialFormValues);
-  };
+    }
+    postNewMember(newMember)
+    setCurrentUser(newMember)
+    setFormValues(initialFormValues)
+  }
 
+  console.log('UserContext_a: ', UserContext)
+  console.log('currentUser_a: ', currentUser)
+  const { username, password } = (!currentUser) ? contextUser.user : currentUser.user 
+  console.log('username_a: ', username)
+  console.log('password_a: ', password)
+    
   return (
+  <UserContext.Provider value={contextUser} >
     <div>
       <Wrapper>
         <Header />
@@ -131,6 +143,8 @@ function App() {
       </Wrapper>
       <Footer />
     </div>
+  </UserContext.Provider>
+
   );
 }
 

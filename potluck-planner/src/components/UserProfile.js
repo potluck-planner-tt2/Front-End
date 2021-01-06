@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Route, useRouteMatch, useParams, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
 import EventForm from './EventForm';
-
+import UserContext from './../contexts/UserContext'
 
 // **** Using dummy Data atm **** //
 // **** Using dummy Data atm **** //
@@ -70,8 +70,15 @@ function UserProfile(props) {
   let match = useRouteMatch();
   let history = useHistory();
   let location = useLocation();
+  
 
-
+  const currentUser = useContext(UserContext)
+  console.log('UserContext_p: ', UserContext)
+  console.log('currentUser_p: ', currentUser)
+  const { username, password } = currentUser.user
+  console.log('username_p: ', username)
+  console.log('password_p: ', password)
+  
   return (
     <StyledUserProfile className="userProfile">
       <div className="welcomeMsg">

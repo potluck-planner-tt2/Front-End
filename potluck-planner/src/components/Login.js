@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { axiosDev } from '../utils/axiosDev';
+import UserContext from './../contexts/UserContext'
 
 const StyledLogin = styled.form`
 display:flex;
@@ -40,15 +41,19 @@ const initialValues = {
 
 function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
-
+const user = useContext(UserContext)
+console.log('user: ', user)
 let history = useHistory();
 
   const login = event => {
    event.preventDefault();
 
    axiosDev().post('/api/auth/login', logValues)
-   .then(res => {
+     .then(res => {
+     console.log('res: ', res)
      window.localStorage.setItem("token", res.data.token)
+     user.username = logValues.username
+     user.password = logValues.password
      getUser();
    })
    .catch(err => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/logo8.png';
+import Logout from './Logout'
 
 const StyledHeader = styled.header`
   /* background: linear-gradient(to bottom, #56ab2f, #a8e063); */
@@ -130,6 +131,7 @@ function Header(props) {
               Sign Up
             </button>
           </div>
+          <Logout />
         </div>
       </nav>
     </StyledHeader>

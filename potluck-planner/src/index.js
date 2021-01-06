@@ -5,11 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'normalize.css';
+import contextUser from './contexts/contextUser'
+import UserContext from './contexts/UserContext'
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <UserContext.Provider value={ contextUser }>  
+        <App />
+      </UserContext.Provider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root'),
