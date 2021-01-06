@@ -5,7 +5,6 @@ import bullet from '../images/bullet.png';
 
 const StyledAbout = styled.div`
   margin: 0 auto;
-
   border: 2px solid white;
   color: #f7f9fb;
   background: #687864;

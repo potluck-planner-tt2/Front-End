@@ -57,7 +57,8 @@ const StyledHeader = styled.header`
   }
 
   .btn:focus {
-    box-shadow: 0 0 0 2px #8fc1e3;
+    box-shadow: 0 0 0 2px #f7f9fb;
+    outline: white;
   }
 
   .logo {

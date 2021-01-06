@@ -5,7 +5,8 @@ const StyledFooter = styled.footer`
   background-color: #687864;
   text-align: center;
   width: 100%;
-  height: 7vh;
+  height: 6vh;
+  border-top: 2px solid white;
 
   h3 {
     font-family: 'Lobster', cursive;
