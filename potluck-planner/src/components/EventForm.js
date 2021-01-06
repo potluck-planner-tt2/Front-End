@@ -93,18 +93,25 @@ function EventForm(props) {
   }
 
   useEffect(() => {
-    // check db for food list
-    // cb to create and paint list below added foods
+    // axios call and paint foodlist to food container
+    const foodContainer = document.querySelector('.foodContainer');
+    foodList.map(item => {
+      const div = document.createElement('div');
+      div.classList.add('food')
+      div.textContent = item;
+      foodContainer.append(div)
+    })
   }, [foodList])
 
   const addFood = event => {
     event.preventDefault();
+    let foodInput = document.querySelector('#food');
 
-    const foodInput = document.querySelector('#food').value;
-    
-    foodList.push(foodInput.toLowerCase());
+    foodList.push(foodInput.value.toLowerCase());
+    foodInput.value = "";
+
     console.log(foodInput);
-    console.log(foodList)
+    console.log(foodList);
   }
 
   return (
@@ -142,20 +149,19 @@ function EventForm(props) {
         value={formValues.date_time}
         />
       </label>
-      <div className="foodList">
-        <label className="formLabel">Potluck Foods:
-          <input
-          type="text"
-          id="food"
-          className="formInput"
-          name='food'
-          placeholder="Enter Food"
-          onChange={changeHandler}
-          value={formValues.foods}
-          />
-        </label>
-        <button className="addFoodBtn" onClick={addFood}>Add Food</button>
-      </div>
+      <label className="formLabel">Potluck Foods:
+        <input
+        type="text"
+        id="food"
+        className="formInput"
+        name='food'
+        placeholder="Enter Food"
+        onChange={changeHandler}
+        value={formValues.foods}
+        />
+      </label>
+      <button className="addFoodBtn" onClick={addFood}>Add Food</button>
+      <div className="foodContainer"></div>
       <button className="eventFormBtn"
       type="submit"
       >Create New Event</button>
