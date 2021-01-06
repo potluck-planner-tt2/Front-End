@@ -62,6 +62,7 @@ const initialFoodList = [];
 function EventForm(props) {
   const [ formValues, setFormValues ] = useState(initialEventValues);
   const [ foodList, setFoodList ] = useState(initialFoodList);
+
   const changeHandler = event => {
     setFormValues({
       ...formValues,
@@ -99,19 +100,17 @@ function EventForm(props) {
       const div = document.createElement('div');
       div.classList.add('food')
       div.textContent = item;
-      foodContainer.append(div)
+      foodContainer.append(div);
     })
   }, [foodList])
 
   const addFood = event => {
     event.preventDefault();
-    let foodInput = document.querySelector('#food');
+    let foodInput = document.querySelector('#food').value;
 
-    foodList.push(foodInput.value.toLowerCase());
-    foodInput.value = "";
-
-    console.log(foodInput);
     console.log(foodList);
+
+    setFoodList(foodList => [foodInput, ...foodList])
   }
 
   return (
@@ -140,7 +139,7 @@ function EventForm(props) {
         />
       </label>
       <label className="formLabel">Date/Time:
-        <input 
+        <input
         type="datetime-local"
         id="date_time"
         className="formInput"
