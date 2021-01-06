@@ -101,7 +101,7 @@ function App() {
         {/* Designing UserProfile, adding path/props after */}
         {/* /profile path is just for testing */}
         <Route path='/thanks'>
-          <ThankYou />
+          <ThankYou values={formValues} />
         </Route>
         <Route path='/profile'>
           <UserProfile />

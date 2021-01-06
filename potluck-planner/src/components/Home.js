@@ -75,23 +75,23 @@ function Home() {
         <p>
           Some of the wonderful features you will have access too upon signing
           up include:
-          <div className='listContainer'>
-            <ul>
-              <li>
-                Quickly schedule a new potluck and invite your friends! They can
-                even confirm if they're coming!
-              </li>
-              <li>
-                Create a food list! Friends can mark off items they would like
-                to bring, no more confusion!
-              </li>
-              <li>
-                Easily notify all your friends of any changes to the when and
-                where! They will never miss a beet!
-              </li>
-            </ul>
-          </div>
         </p>
+        <div className='listContainer'>
+          <ul>
+            <li>
+              Quickly schedule a new potluck and invite your friends! They can
+              even confirm if they're coming!
+            </li>
+            <li>
+              Create a food list! Friends can mark off items they would like to
+              bring, no more confusion!
+            </li>
+            <li>
+              Easily notify all your friends of any changes to the when and
+              where! They will never miss a beet!
+            </li>
+          </ul>
+        </div>
       </StyledAbout>
     </div>
   );

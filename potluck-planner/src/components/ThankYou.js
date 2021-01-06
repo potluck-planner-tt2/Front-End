@@ -1,5 +1,6 @@
 import React from 'react';
-import Delay from './DelayedLoader';
+import { axiosDev } from '../utils/axiosDev';
+import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -51,12 +52,26 @@ const StyledWrapper = styled.div`
 `;
 
 function ThankYou({ values }) {
+  let history = useHistory();
+
+  const login = () => {
+    axiosDev()
+      .post('/api/auth/login', values)
+      .then((res) => {
+        window.localStorage.setItem('token', res.data.token);
+        history.push(`/profile/${res.data.user_id}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  setTimeout(login, 2000);
+
   return (
     <StyledWrapper className='formWrapper'>
       <h2>Thank you!</h2>
-      <p>Thank you for registering, redirecting to login...</p>
-      <div class='spinner'></div>
-      <Delay />
+      <p>Thank you for registering, redirecting to profile...</p>
+      <div className='spinner'></div>
     </StyledWrapper>
   );
 }
