@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import schema from './validation/schema';
@@ -11,19 +11,16 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import UserProfile from './components/UserProfile';
+import ThankYou from './components/ThankYou';
 
 const initialFormValues = {
   username: '',
-  // email: '',
   password: '',
-  // passwordConfirm: '',
 };
 
 const initialFormErrors = {
   username: '',
-  // email: '',
   password: '',
-  // passwordConfirm: '',
 };
 
 const initialMembers = [];
@@ -70,18 +67,20 @@ function App() {
     });
   }, [formValues]);
 
+  let history = useHistory();
+
   const postNewMember = (newMember) => {
     axios
       .post('https://pl-planner.herokuapp.com/api/auth/register', newMember)
       .then((res) => {
         setMembers([res.data, ...members]);
-        setFormValues(initialFormValues);
       })
       .catch((error) => {
         if (error.response.status === 500) {
-          console.log(error);
+          history.push(`/thanks`);
+          setFormValues(initialFormValues);
         } else {
-          alert(error.response.data);
+          alert(error.response.data.message);
           console.log(error);
         }
       });
@@ -93,7 +92,6 @@ function App() {
       password: formValues.password,
     };
     postNewMember(newMember);
-    setFormValues(initialFormValues);
   };
 
   return (
@@ -102,6 +100,9 @@ function App() {
       <Switch>
         {/* Designing UserProfile, adding path/props after */}
         {/* /profile path is just for testing */}
+        <Route path='/thanks'>
+          <ThankYou values={formValues} />
+        </Route>
         <Route path='/profile'>
           <UserProfile />
         </Route>
