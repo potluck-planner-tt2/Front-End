@@ -5,7 +5,7 @@ const StyledFooter = styled.footer`
   background-color: #687864;
   text-align: center;
   width: 100%;
-  height: 7vh;
+  height: 55px;
   border-top: 2px solid white;
 
   h3 {
