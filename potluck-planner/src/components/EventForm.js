@@ -24,7 +24,6 @@ border: 2px solid black;
   font-weight: 600;
   color: black;
   background: #56ab2f;
-  // todo adjust color based on button disabled/enabled
 
   :hover {
     cursor: pointer;
@@ -34,18 +33,11 @@ border: 2px solid black;
 
 const initialEventValues= {
   eventName:"",
-  // organizer_id: useParams(),
   date_time:"",
 }
 
-
 function EventForm(props) {
   const [ formValues, setFormValues ] = useState(initialEventValues);
-
-  // need params to fetch id from url
-  // initial event values
-  // handle state/post "in-house"
-  // new diabled button using new eventForm schema and yup?
 
   const changeHandler = event => {
     setFormValues({

@@ -65,6 +65,7 @@ h3 {
 `
 
 function UserProfile(props) {
+  // testing different routing 
   let { id } = useParams();
   let match = useRouteMatch();
   let history = useHistory();
@@ -91,6 +92,7 @@ function UserProfile(props) {
         })}
       </div>
       <div>
+        {/* nest or create new page to have space for food map etc. // no id props in UserProfiles to pass into ${id}*/}
         <NavLink to={`${match.url}/${id}/newpotluck`}>
         <button className="newEventBtn">Create A New Event!</button>
         </NavLink>

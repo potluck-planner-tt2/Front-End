@@ -80,11 +80,7 @@ function App() {
       username: formValues.username.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
-      // maybe need passwordConfirm sent to back end?
-      // passwordConfirm:formValues.passwordConfirm.trim(),
     };
-    // axios POST newMember
-    // set formvalues to initial
   };
 
   return (

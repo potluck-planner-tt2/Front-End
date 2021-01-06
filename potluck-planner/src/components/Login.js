@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { axiosDev } from '../utils/axiosDev';
-import axios from 'axios';
 
 const StyledLogin = styled.form`
 display:flex;
@@ -43,8 +42,6 @@ function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
 
 let history = useHistory();
-const { id } = useParams();
-
 
   const login = event => {
    event.preventDefault();
@@ -57,14 +54,13 @@ const { id } = useParams();
    .catch(err => {
     console.log(err)
    }) 
-   // get request and history.push on success
    setLogValues(initialValues);
   }
 
   const getUser = () => {
     axiosDev().get('https://pl-planner.herokuapp.com/api/users')
    .then(res => {
-      res.data.map(user => {
+      res.data.find(user => {
         if(user.username === logValues.username) {
           history.push(`/profile/${user.user_id}`);
         }
@@ -105,7 +101,6 @@ const { id } = useParams();
         value={logValues.password}
         />
       </label>
-      {/* Add server response error if any */}
       <button className="loginFormBtn"
       type="submit"
       >Log In</button>
