@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { axiosDev } from '../utils/axiosDev';
 
@@ -40,20 +41,32 @@ const initialValues = {
 function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
 
+let history = useHistory();
+
   const login = event => {
    event.preventDefault();
 
    axiosDev().post('/api/auth/login', logValues)
    .then(res => {
      window.localStorage.setItem("token", res.data.token)
-     setLogValues(initialValues);
-     console.log(res.data.token)
+     getUser();
    })
    .catch(err => {
     console.log(err)
    }) 
-  
+   setLogValues(initialValues);
   }
+
+  const getUser = () => {
+    axiosDev().get('https://pl-planner.herokuapp.com/api/users')
+   .then(res => {
+      res.data.find(user => {
+        if(user.username === logValues.username) {
+          history.push(`/profile/${user.user_id}`);
+        }
+      })
+   })
+   }
 
   const changeHandler = event => {
     const { name, value } = event.target;
@@ -88,7 +101,6 @@ const [ logValues, setLogValues ] = useState(initialValues);
         value={logValues.password}
         />
       </label>
-      {/* Add server response error if any */}
       <button className="loginFormBtn"
       type="submit"
       >Log In</button>

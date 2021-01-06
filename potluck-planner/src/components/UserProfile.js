@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, useRouteMatch, useParams, useHistory } from 'react-router-dom';
+import { NavLink, Route, useRouteMatch, useParams, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
@@ -65,11 +65,12 @@ h3 {
 `
 
 function UserProfile(props) {
+  // testing different routing 
   let { id } = useParams();
   let match = useRouteMatch();
   let history = useHistory();
+  let location = useLocation();
 
-  console.log(match)
 
   return (
     <StyledUserProfile className="userProfile">
@@ -91,13 +92,13 @@ function UserProfile(props) {
         })}
       </div>
       <div>
-        {/* Add nested Link/NavLink to EventForm */}
-        <Link to={`${match.url}/${id}/newpotluck`}>
+        {/* nest or create new page to have space for food map etc. // no id props in UserProfiles to pass into ${id}*/}
+        <NavLink to={`${match.url}/${id}/newpotluck`}>
         <button className="newEventBtn">Create A New Event!</button>
-        </Link>
+        </NavLink>
       </div>
       <div>
-        <Route path={`${match.url}/${id}/newpotluck`}>
+        <Route path={`${match.url}/:id/newpotluck`}>
           <EventForm />
         </Route>
       </div>
