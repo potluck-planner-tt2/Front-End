@@ -32,13 +32,8 @@ const initialDisabled = true;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 93vh;
+  min-height: 100vh;
   text-align: center;
-  background: url('https://background-tiles.com/overview/white/patterns/large/1027.png');
-
-  .foot {
-    align-self: flex-end;
-  }
 `;
 
 function App() {
@@ -102,35 +97,32 @@ function App() {
   };
 
   return (
-    <div>
-      <Wrapper>
-        <Header />
-        <Switch>
-          {/* Designing UserProfile, adding path/props after */}
-          {/* /profile path is just for testing */}
-          <Route path='/profile'>
-            <UserProfile />
-          </Route>
-          <Route path='/login'>
-            <Login />
-
-          </Route>
-          <Route path='/registration'>
-            <Registration
-              values={formValues}
-              onChange={onChange}
-              onSubmit={onSubmit}
-              disabled={isDisabled}
-              errors={formErrors}
-            />
-          </Route>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-        </Switch>
-      </Wrapper>
+    <Wrapper>
+      <Header />
+      <Switch>
+        {/* Designing UserProfile, adding path/props after */}
+        {/* /profile path is just for testing */}
+        <Route path='/profile'>
+          <UserProfile />
+        </Route>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/registration'>
+          <Registration
+            values={formValues}
+            onChange={onChange}
+            onSubmit={onSubmit}
+            disabled={isDisabled}
+            errors={formErrors}
+          />
+        </Route>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+      </Switch>
       <Footer />
-    </div>
+    </Wrapper>
   );
 }
 

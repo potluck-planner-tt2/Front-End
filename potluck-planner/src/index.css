@@ -1,5 +1,6 @@
 body {
   font-family: droid-sans, sans-serif;
+  background-image: url('./images/background.png');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
