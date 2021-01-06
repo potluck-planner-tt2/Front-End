@@ -33,6 +33,7 @@ border: 2px solid black;
 
 const initialEventValues= {
   eventName:"",
+  location:"",
   date_time:"",
 }
 
@@ -61,9 +62,19 @@ function EventForm(props) {
         id="eventName"
         className="formInput"
         name='eventName'
-        placeholder="Enter Event Name"
+        placeholder="Event Name"
         onChange={changeHandler}
         value={formValues.username}
+        />
+      </label>
+      <label className="formLabel">Location:
+        <input 
+        type="text"
+        id="location"
+        className="formInput"
+        name='location'
+        onChange={changeHandler}
+        value={formValues.location}
         />
       </label>
       <label className="formLabel">Date/Time:
@@ -72,6 +83,7 @@ function EventForm(props) {
         id="dateTime"
         className="formInput"
         name='dateTime'
+        placeholder="Location"
         onChange={changeHandler}
         value={formValues.date_time}
         />
