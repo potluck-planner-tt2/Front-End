@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import { axiosDev } from '../utils/axiosDev';
 
 const StyledEventForm = styled.form`
 display:flex;
 flex-flow:column nowrap;
 align-items:center;
 width: 80%;
-margin:auto;
+margin: 10px auto;
 background:#e5c299;
 font-size: 2rem;
 border-radius: 15px;
 border: 2px solid black;
+
+h3 {
+  padding:15px 5px;
+}
 
 .formInput {
   margin: 5px;
@@ -29,6 +34,20 @@ border: 2px solid black;
     cursor: pointer;
   }
 }
+
+.addFoodBtn {
+  padding: 5px 15px;
+  margin: 10px;
+  border-radius: 7px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  background: blue;
+
+  :hover {
+    cursor: pointer;
+  }
+}
 `
 
 const initialEventValues= {
@@ -37,9 +56,12 @@ const initialEventValues= {
   date_time:"",
 }
 
+const initialFoodList = [];
+
+
 function EventForm(props) {
   const [ formValues, setFormValues ] = useState(initialEventValues);
-
+  const [ foodList, setFoodList ] = useState(initialFoodList);
   const changeHandler = event => {
     setFormValues({
       ...formValues,
@@ -47,10 +69,35 @@ function EventForm(props) {
     });
   }
 
+  const postNewPotluck = (newPotluck) => {
+    axiosDev().post('/api/potlucks', newPotluck)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   const submitHandler = event => {
     event.preventDefault();
-    // post with axios
-    // return form to initial values
+    const newPotluck = {
+      // add user_id from global store
+      eventName: formValues.eventName.trim(),
+      location: formValues.location.trim(),
+      date_time: formValues.date_time.trim(),
+      foodList: formValues.foodList
+    };
+    postNewPotluck(newPotluck);
+    setFormValues(initialEventValues);
+  }
+
+  const addFood = event => {
+    event.preventDefault();
+
+    const foodInput = document.querySelector('#foods')
+    
+
   }
 
   return (
@@ -62,32 +109,46 @@ function EventForm(props) {
         id="eventName"
         className="formInput"
         name='eventName'
-        placeholder="Event Name"
+        placeholder="Enter Event Name"
         onChange={changeHandler}
         value={formValues.username}
         />
       </label>
-      <label className="formLabel">Location:
+      <label className="formLabel">Event Location:
         <input 
         type="text"
         id="location"
         className="formInput"
         name='location'
+        placeholder="Enter A Location"
         onChange={changeHandler}
         value={formValues.location}
         />
       </label>
       <label className="formLabel">Date/Time:
         <input 
-        type="date"
-        id="dateTime"
+        type="datetime-local"
+        id="date_time"
         className="formInput"
-        name='dateTime'
-        placeholder="Location"
+        name='date_time'
         onChange={changeHandler}
         value={formValues.date_time}
         />
       </label>
+      <div className="foodList">
+        <label className="formLabel">Potluck Foods:
+          <input
+          type="text"
+          id="food"
+          className="formInput"
+          name='food'
+          placeholder="Enter Food"
+          onChange={changeHandler}
+          value={formValues.foods}
+          />
+        </label>
+        <button className="addFoodBtn" onClick={addFood}>Add Food</button>
+      </div>
       <button className="eventFormBtn"
       type="submit"
       >Create New Event</button>
