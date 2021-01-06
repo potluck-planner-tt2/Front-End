@@ -50,24 +50,12 @@ function Login(props) {
       .post('/api/auth/login', logValues)
       .then((res) => {
         window.localStorage.setItem('token', res.data.token);
-        getUser();
+        history.push(`/profile/${res.data.user_id}`);
       })
       .catch((err) => {
         console.log(err);
       });
     setLogValues(initialValues);
-  };
-
-  const getUser = () => {
-    axiosDev()
-      .get('https://pl-planner.herokuapp.com/api/users')
-      .then((res) => {
-        res.data.find((user) => {
-          if (user.username === logValues.username) {
-            history.push(`/profile/${user.user_id}`);
-          }
-        });
-      });
   };
 
   const changeHandler = (event) => {
