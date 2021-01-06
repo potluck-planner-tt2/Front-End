@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { axiosDev } from '../utils/axiosDev';
 
@@ -92,12 +92,19 @@ function EventForm(props) {
     setFormValues(initialEventValues);
   }
 
+  useEffect(() => {
+    // check db for food list
+    // cb to create and paint list below added foods
+  }, [foodList])
+
   const addFood = event => {
     event.preventDefault();
 
-    const foodInput = document.querySelector('#foods')
+    const foodInput = document.querySelector('#food').value;
     
-
+    foodList.push(foodInput.toLowerCase());
+    console.log(foodInput);
+    console.log(foodList)
   }
 
   return (
