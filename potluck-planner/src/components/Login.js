@@ -41,9 +41,10 @@ const initialValues = {
 
 function Login(props) {
 const [ logValues, setLogValues ] = useState(initialValues);
-const user = useContext(UserContext)
-console.log('user: ', user)
-let history = useHistory();
+const loginUser = useContext(UserContext)
+console.log('loginUser: ', loginUser)
+
+  let history = useHistory();
 
   const login = event => {
    event.preventDefault();
@@ -52,8 +53,10 @@ let history = useHistory();
      .then(res => {
      console.log('res: ', res)
      window.localStorage.setItem("token", res.data.token)
+     const user = {}
      user.username = logValues.username
      user.password = logValues.password
+     props.setCurrentUser(user)
      getUser();
    })
    .catch(err => {

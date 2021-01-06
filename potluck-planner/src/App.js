@@ -108,7 +108,7 @@ function App() {
 
   console.log('UserContext_a: ', UserContext)
   console.log('currentUser_a: ', currentUser)
-  const { username, password } = (!currentUser) ? contextUser.user : currentUser.user 
+  const { username, password } = (!currentUser) ? contextUser.user : currentUser 
   console.log('username_a: ', username)
   console.log('password_a: ', password)
     
@@ -124,7 +124,10 @@ function App() {
             <UserProfile />
           </Route>
           <Route path='/login'>
-            <Login />
+              <Login
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              />
 
           </Route>
           <Route path='/registration'>
