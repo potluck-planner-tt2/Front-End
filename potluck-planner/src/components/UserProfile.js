@@ -12,7 +12,8 @@ import axios from 'axios';
 const initialPotlucks = [{
   name:"",
   organizer_id:"",
-  date_time:""
+  date_time:"",
+  location:"",
 }]
 
 const StyledUserProfile = styled.section`
@@ -79,15 +80,22 @@ function UserProfile(props) {
   })
   },[])
 
+// test
+  // potlucks.map(potluck => {
+  //   let sortPotlucks = [];
+  //   if (sortPotlucks.contains(potluck)) {
+  //     sortPotlucks.pop(potluck)
+  //   } else {
+  //     sortPotlucks.push(potluck);
+  //   }
+  // })
 
   return (
     <StyledUserProfile className="userProfile">
       <div className="welcomeMsg">
-        {/* dynamically add username */}
         <h2>Welcome back, {loggedInUser.username}</h2>
       </div>
       <div>
-        {/* keep Upcoming Events unmounted until they have events */}
         <h3 className="eventMsg">Upcoming Events</h3>
       </div>
       <div className="eventCardContainer">
@@ -105,14 +113,13 @@ function UserProfile(props) {
      })}
       </div>
       <div>
-        {/* nest or create new page to have space for food map etc. // no id props in UserProfiles to pass into ${id}*/}
         <NavLink to={`${match.url}/${user_id}/newpotluck`}>
         <button className="newEventBtn">Create A New Event!</button>
         </NavLink>
       </div>
       <div>
         <Route path={`${match.url}/:id/newpotluck`}>
-          <EventForm potlucks={potlucks}/>
+          <EventForm potlucks={potlucks} setPotlucks={setPotlucks}/>
         </Route>
       </div>
     </StyledUserProfile>

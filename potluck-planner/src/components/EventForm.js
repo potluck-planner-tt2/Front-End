@@ -68,7 +68,7 @@ const initialFoodList = [];
 
 
 function EventForm(props) {
-  const { potlucks } = props;
+  const { potlucks, setPotlucks } = props;
 
   const [ formValues, setFormValues ] = useState(initialEventValues);
   const [ foodList, setFoodList ] = useState(initialFoodList);
@@ -94,8 +94,7 @@ function EventForm(props) {
     };
       axiosDev().post('/api/potlucks', newPotluck)
       .then(res => {
-        console.log(res)
-
+        setPotlucks(res.data)
       })
       .catch(err => {
         console.log(err)
@@ -134,7 +133,6 @@ function EventForm(props) {
           value={formValues.username}
         />
       </label>
-
       <label className="formLabel">Event Location:
         <input 
         type="text"
@@ -172,7 +170,6 @@ function EventForm(props) {
       <button className="eventFormBtn"
       type="submit"
       >Create New Event</button>
-
     </StyledEventForm>
   );
 }
