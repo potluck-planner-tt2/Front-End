@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Route, useRouteMatch, useParams, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
 import EventForm from './EventForm';
+import { UserContext } from '../context/UserContext'
 
 
 // **** Using dummy Data atm **** //
@@ -71,12 +72,14 @@ function UserProfile(props) {
   let history = useHistory();
   let location = useLocation();
 
+  const { loggedInUser } = useContext(UserContext)
+
 
   return (
     <StyledUserProfile className="userProfile">
       <div className="welcomeMsg">
         {/* dynamically add username */}
-        <h2>Welcome back, _username_</h2>
+        <h2>Welcome back, {loggedInUser.username}</h2>
       </div>
       <div>
         {/* keep Upcoming Events unmounted until they have events */}

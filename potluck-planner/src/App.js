@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import schema from './validation/schema';
@@ -11,19 +11,18 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import UserProfile from './components/UserProfile';
+import ThankYou from './components/ThankYou';
+
+import { UserContext } from "./context/UserContext";
 
 const initialFormValues = {
   username: '',
-  // email: '',
   password: '',
-  // passwordConfirm: '',
 };
 
 const initialFormErrors = {
   username: '',
-  // email: '',
   password: '',
-  // passwordConfirm: '',
 };
 
 const initialMembers = [];
@@ -32,13 +31,8 @@ const initialDisabled = true;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 93vh;
+  min-height: 100vh;
   text-align: center;
-  background: url('https://background-tiles.com/overview/white/patterns/large/1027.png');
-
-  .foot {
-    align-self: flex-end;
-  }
 `;
 
 function App() {
@@ -47,6 +41,15 @@ function App() {
   const [members, setMembers] = useState(initialMembers);
   const [isDisabled, setIsDisabled] = useState(initialDisabled);
 
+  //CONTEXT -- GLOBAL STATE
+  const initialUser = {
+    user_id: null,
+    username: "",
+  };
+
+  const [loggedInUser, setLoggedInUser] = useState(initialUser);
+
+  //EVT HANDLERS AND HELPERS
   const onChange = (name, value) => {
     yup
       .reach(schema, name)
@@ -54,7 +57,7 @@ function App() {
       .then(() => {
         setFormErrors({
           ...formErrors,
-          [name]: '',
+          [name]: "",
         });
       })
       .catch((err) => {
@@ -75,18 +78,20 @@ function App() {
     });
   }, [formValues]);
 
+  let history = useHistory();
+
   const postNewMember = (newMember) => {
     axios
-      .post('https://pl-planner.herokuapp.com/api/auth/register', newMember)
+      .post("https://pl-planner.herokuapp.com/api/auth/register", newMember)
       .then((res) => {
         setMembers([res.data, ...members]);
-        setFormValues(initialFormValues);
       })
       .catch((error) => {
         if (error.response.status === 500) {
-          console.log(error);
+          history.push(`/thanks`);
+          setFormValues(initialFormValues);
         } else {
-          alert(error.response.data);
+          alert(error.response.data.message);
           console.log(error);
         }
       });
@@ -98,38 +103,44 @@ function App() {
       password: formValues.password,
     };
     postNewMember(newMember);
-    setFormValues(initialFormValues);
   };
 
   return (
     <div>
-      <Wrapper>
-        <Header />
-        <Switch>
-          {/* Designing UserProfile, adding path/props after */}
-          {/* /profile path is just for testing */}
-          <Route path='/profile'>
-            <UserProfile />
-          </Route>
-          <Route path='/login'>
-            <Login />
-
-          </Route>
-          <Route path='/registration'>
-            <Registration
-              values={formValues}
-              onChange={onChange}
-              onSubmit={onSubmit}
-              disabled={isDisabled}
-              errors={formErrors}
-            />
-          </Route>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-        </Switch>
-      </Wrapper>
-      <Footer />
+      <UserContext.Provider value ={{
+        loggedInUser, 
+        setLoggedInUser
+      }}>
+        <Wrapper>
+          <Header />
+          <Switch>
+            {/* Designing UserProfile, adding path/props after */}
+            {/* /profile path is just for testing */}
+            <Route path='/thanks'>
+              <ThankYou values={formValues} />
+            </Route>
+            <Route path="/profile">
+              <UserProfile />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/registration">
+              <Registration
+                values={formValues}
+                onChange={onChange}
+                onSubmit={onSubmit}
+                disabled={isDisabled}
+                errors={formErrors}
+              />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Wrapper>
+        <Footer />
+      </UserContext.Provider>
     </div>
   );
 }

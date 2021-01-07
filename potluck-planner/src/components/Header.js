@@ -46,7 +46,7 @@ const StyledHeader = styled.header`
 
   .btn {
     padding: 10px 15px;
-    width: 90px;
+    width: 100px;
     margin: 10px;
     border: none;
     border-radius: 7px;
