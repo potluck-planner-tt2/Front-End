@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import React, { useState, useEffect, useContext } from 'react'
-
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { axiosDev } from '../utils/axiosDev';
 
@@ -59,7 +59,7 @@ h3 {
 
 
 const initialEventValues= {
-  eventName:"",
+  name:"",
   location:"",
   date_time:"",
 }
@@ -74,6 +74,9 @@ function EventForm(props) {
   const [ foodList, setFoodList ] = useState(initialFoodList);
 
   const { loggedInUser } = useContext(UserContext)
+  const { user_id } = loggedInUser;
+
+  const history = useHistory();
 
   const changeHandler = (event) => {
     setFormValues({
@@ -81,7 +84,6 @@ function EventForm(props) {
       [event.target.name]: event.target.value,
     });
   };
-
   
   const submitHandler = (event) => {
     event.preventDefault();
@@ -100,6 +102,7 @@ function EventForm(props) {
         console.log(err)
       })
       setFormValues(initialEventValues);
+      history.push(`/profile/${user_id}`)
   }
 
   const addFood = event => {

@@ -105,7 +105,7 @@ function UserProfile(props) {
             return (
               <EventCard
               className="eventCard"
-              key={potluck.organizer_id}
+              key={potluck.pl_id}
               event={potluck}
               />
               )
