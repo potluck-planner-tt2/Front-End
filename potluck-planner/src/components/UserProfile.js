@@ -69,7 +69,9 @@ function UserProfile(props) {
   // testing different routing 
   let { id } = useParams();
   let match = useRouteMatch();
+  // eslint-disable-next-line
   let history = useHistory();
+  // eslint-disable-next-line
   let location = useLocation();
 
   const { loggedInUser } = useContext(UserContext)
