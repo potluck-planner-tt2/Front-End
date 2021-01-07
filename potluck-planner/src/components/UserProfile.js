@@ -1,25 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { NavLink, Route, useRouteMatch, useParams, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
 import EventForm from './EventForm';
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../context/UserContext';
+import { axiosDev } from '../utils/axiosDev';
+import axios from 'axios';
 
 
-// **** Using dummy Data atm **** //
-// **** Using dummy Data atm **** //
-const dummyData = [{
-  name:"Paul's Potato Party",
-  organizer_id:9000,
-  date_time:"2021-02-02 15:00"
-},
-{
-  name:"Fear Factor Picnic",
-  organizer_id:33,
-  date_time:"2021-03-3 13:00"
-},
-]
+const initialPotlucks = [{
+  name:"",
+  organizer_id:"",
+  date_time:""
+}]
 
 const StyledUserProfile = styled.section`
 display:flex;
@@ -66,16 +60,24 @@ h3 {
 `
 
 function UserProfile(props) {
-  // testing different routing 
-  let { id } = useParams();
+  const [ potlucks, setPotlucks ] = useState(initialPotlucks);
+
   let match = useRouteMatch();
-  // eslint-disable-next-line
-  let history = useHistory();
-  // eslint-disable-next-line
-  let location = useLocation();
+  
 
   const { loggedInUser } = useContext(UserContext)
   const { user_id } = loggedInUser;
+
+  useEffect(() => {
+    axiosDev().get('/api/potlucks')
+  .then(res => {
+    setPotlucks(res.data)
+    console.log(potlucks)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+  },[])
 
 
   return (
@@ -89,13 +91,18 @@ function UserProfile(props) {
         <h3 className="eventMsg">Upcoming Events</h3>
       </div>
       <div className="eventCardContainer">
-        {dummyData.map(event => {
-         return <EventCard
-         className="eventCard"
-         key={event.organizer_id}
-         event={event}
-         />
-        })}
+        {potlucks.map(potluck => {
+          if(potluck.organizer_id === loggedInUser.user_id)
+          {
+            return (
+              <EventCard
+              className="eventCard"
+              key={potluck.organizer_id}
+              event={potluck}
+              />
+              )
+          }
+     })}
       </div>
       <div>
         {/* nest or create new page to have space for food map etc. // no id props in UserProfiles to pass into ${id}*/}
