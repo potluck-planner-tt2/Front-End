@@ -1,5 +1,8 @@
-import React from 'react';
+import React,{ useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { UserContext } from '../context/UserContext';
+import { axiosDev } from '../utils/axiosDev';
 
 const StyledEventCard = styled.div`
 display:flex;
@@ -48,37 +51,50 @@ p {
   text-decoration:line-through;
 }
 `
+const initialFoodList = [];
 
 function EventCard(props) {
+  const [ foodList, setFoodList ] = useState(initialFoodList);
   const { name, date_time, } = props.event;
 
-  const dummyFoodItems = ["Baked Beans","Uncle Earl's Chili",'Expired Lima Beans']
+  const { loggedInUser } = useContext(UserContext)
+  console.log(loggedInUser)
+  const { user_id, username } = loggedInUser;
+
+  // const dummyFoodItems = ["Baked Beans","Uncle Earl's Chili",'Expired Lima Beans'];
 
   const getFoodList = (event) => {
-    // axios GET call for food list of specific potluck event
-    //.then const data = res.data
-    // map through data add new component (list-style) under it's respective card 
     const { target } = event;
     target.classList.add('hide')
 
-    // map into new component to pass userid/foodid props?
-    dummyFoodItems.map(item => {
-      return foodItem(item)
+    foodList.map(item => {
+      return foodItem(item.name)
     })
   }
 
-  // working on if item is already being brought, the text will show strike-through and label it with its cook
+  // axios foodlist
+  useEffect(() => {
+    axiosDev().get('/api/foods')
+    .then(res => {
+      console.log(res.data);
+      setFoodList(res.data);
+    })
+    .catch(err => {
+      console.log(err)
+    }) 
+  },[])
 
   const foodItem = (item)=> {
     const foodContainer = document.querySelector(".foodContainer");
     const div = document.createElement('div');
     div.classList.add('foodItem')
     div.textContent = item;
+
     div.addEventListener('click', (event) => {
       event.target.classList.toggle("strike");
       const span = document.createElement('span');
       span.classList.toggle('cook');
-      span.textContent = `Brought by __username__`;
+      span.textContent = `Brought by ${username}`;
       div.parentNode.insertBefore(span, div.nextSibling);
     },{once:true})
     foodContainer.append(div);
@@ -89,7 +105,9 @@ function EventCard(props) {
       <h4 className="title">{name}</h4>
       <p className="subtitle">Date/Time: {date_time}</p>
       <button className="eventDetails" onClick={getFoodList}>Details</button>
-      <div className="foodContainer"></div>
+      <div className="foodContainer">
+        { }
+      </div>
     </StyledEventCard>
   )
 }
