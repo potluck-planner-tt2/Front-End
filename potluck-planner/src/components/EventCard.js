@@ -54,8 +54,9 @@ p {
 const initialFoodList = [];
 
 function EventCard(props) {
-  const [ foodList, setFoodList ] = useState(initialFoodList);
-  const { name, date_time, } = props.event;
+
+  const { name, date_time, location } = props.event;
+
 
   const { loggedInUser } = useContext(UserContext)
   console.log(loggedInUser)
@@ -103,6 +104,7 @@ function EventCard(props) {
   return (
     <StyledEventCard className="eventCard">
       <h4 className="title">{name}</h4>
+      <p className="location">Location: {location}</p>
       <p className="subtitle">Date/Time: {date_time}</p>
       <button className="eventDetails" onClick={getFoodList}>Details</button>
       <div className="foodContainer">

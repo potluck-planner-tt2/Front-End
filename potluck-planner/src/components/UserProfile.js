@@ -110,9 +110,10 @@ function UserProfile(props) {
           if (potluck.organizer_id === loggedInUser.user_id) {
             return (
               <EventCard
-                className='eventCard'
-                key={potluck.pl_id}
-                event={potluck}
+              className="eventCard"
+              key={potluck.pl_id}
+              event={potluck}
+
               />
             );
           }
