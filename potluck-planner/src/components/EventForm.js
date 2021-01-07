@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from 'react'
 
 import styled from 'styled-components';
@@ -39,8 +40,6 @@ h3 {
     }
   }
 
-}
-
 .addFoodBtn {
   padding: 5px 15px;
   margin: 10px;
@@ -55,6 +54,7 @@ h3 {
   }
 }
 `
+
 
 const initialEventValues= {
   eventName:"",
