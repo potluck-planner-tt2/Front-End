@@ -75,6 +75,7 @@ function UserProfile(props) {
   let location = useLocation();
 
   const { loggedInUser } = useContext(UserContext)
+  const { user_id } = loggedInUser;
 
 
   return (
@@ -98,7 +99,7 @@ function UserProfile(props) {
       </div>
       <div>
         {/* nest or create new page to have space for food map etc. // no id props in UserProfiles to pass into ${id}*/}
-        <NavLink to={`${match.url}/${id}/newpotluck`}>
+        <NavLink to={`${match.url}/${user_id}/newpotluck`}>
         <button className="newEventBtn">Create A New Event!</button>
         </NavLink>
       </div>
