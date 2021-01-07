@@ -71,8 +71,8 @@ function UserProfile(props) {
   useEffect(() => {
     axiosDev().get('/api/potlucks')
   .then(res => {
+    console.log(res.data)
     setPotlucks(res.data)
-    console.log(potlucks)
   })
   .catch(err => {
     console.log(err)
@@ -112,7 +112,7 @@ function UserProfile(props) {
       </div>
       <div>
         <Route path={`${match.url}/:id/newpotluck`}>
-          <EventForm />
+          <EventForm potlucks={potlucks}/>
         </Route>
       </div>
     </StyledUserProfile>
