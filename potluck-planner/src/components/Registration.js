@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -6,7 +7,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   margin: auto;
   background-color: #687864;
-  height: 50vh;
+  min-height: 50vh;
   width: 600px;
   color: #f7f9fb;
   font-family: droid-sans, sans-serif;
@@ -50,11 +51,14 @@ const StyledRegistration = styled.form`
     margin-left: 20px;
     border-radius: 7px;
     border: none;
+    text-align: center;
   }
 
   .formInput:focus {
     box-shadow: 0 0 0 3px #8fc1e3;
     outline: white;
+    color: transparent;
+    text-shadow: 0 0 0 black;
   }
 
   #password {
@@ -104,14 +108,14 @@ const StyledRegistration = styled.form`
 function Registration(props) {
   const { values, onChange, onSubmit, disabled, errors } = props;
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    onSubmit();
-  };
-
   const changeHandler = (event) => {
     const { name, value } = event.target;
     onChange(name, value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    onSubmit();
   };
 
   return (
@@ -130,19 +134,6 @@ function Registration(props) {
             value={values.username}
           />
         </label>
-        {/* Disabling email field for development
-        <label>
-          Email:
-          <input
-            type='email'
-            id='email'
-            className='formInput'
-            name='email'
-            placeholder='Enter Email'
-            onChange={changeHandler}
-            value={values.email}
-          />
-        </label> */}
         <label>
           Password:
           <input
@@ -161,8 +152,6 @@ function Registration(props) {
       </StyledRegistration>
       <div className='errorWrapper'>
         {errors.username && <div className='error'>{errors.username}</div>}
-        {/* Disabling for development 
-        {errors.email && <div className='error'>{errors.email}</div>} */}
         {errors.password && <div className='error'>{errors.password}</div>}
       </div>
     </StyledWrapper>

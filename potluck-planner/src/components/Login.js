@@ -6,38 +6,38 @@ import { axiosDev } from '../utils/axiosDev';
 import { UserContext } from '../context/UserContext'
 
 const StyledLogin = styled.form`
-display:flex;
-flex-flow:column nowrap;
-align-items:center;
-font-size: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  font-size: 2rem;
 
-.error {
-  color:#c70000;
-}
-
-.formInput {
-  margin: 5px;
-}
-
-.loginFormBtn {
-  padding: 5px 15px;
-  margin: 10px;
-  border-radius: 7px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: black;
-  background: #56ab2f;
-  // todo adjust color based on button disabled/enabled
-
-  :hover {
-    cursor: pointer;
+  .error {
+    color: #c70000;
   }
-}
-`
+
+  .formInput {
+    margin: 5px;
+  }
+
+  .loginFormBtn {
+    padding: 5px 15px;
+    margin: 10px;
+    border-radius: 7px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: black;
+    background: #56ab2f;
+    // todo adjust color based on button disabled/enabled
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+`;
 
 const initialValues = {
-  username:"",
-  password:"",
+  username: '',
+  password: '',
 };
 
 function Login(props) {
@@ -46,75 +46,67 @@ function Login(props) {
 
   let history = useHistory();
 
-  const login = event => {
-   event.preventDefault();
-
-   axiosDev().post('/api/auth/login', logValues)
-   .then(res => {
-     window.localStorage.setItem("token", res.data.token)
-     getUser();
-     
-     const loggedUser = {
-       user_id: res.data.user_id,
-       username: res.data.username
-     }
-     setLoggedInUser(loggedUser);
-   })
-   .catch(err => {
-    console.log(err)
-   }) 
-   setLogValues(initialValues);
+  const login = (event) => {
+    event.preventDefault();
+    
+    axiosDev().post('/api/auth/login', logValues)
+      .then(res => {
+        window.localStorage.setItem("token", res.data.token)
+         
+        const loggedUser = {
+          user_id: res.data.user_id,
+          username: res.data.username
+         }
+        setLoggedInUser(loggedUser);
+      
+        history.push(`/profile/${res.data.user_id}`);
+      })
+      .catch(err => {
+        console.log(err)
+      }) 
+    setLogValues(initialValues);
   }
 
-  const getUser = () => {
-    axiosDev().get('https://pl-planner.herokuapp.com/api/users')
-   .then(res => {
-      res.data.find(user => {
-        if(user.username === logValues.username) {
-          history.push(`/profile/${user.user_id}`);
-        }
-      })
-   })
-   }
-
-  const changeHandler = event => {
+  const changeHandler = (event) => {
     const { name, value } = event.target;
     setLogValues({
       ...logValues,
-      [name]: value
-    }); 
-  }
+      [name]: value,
+    });
+  };
 
   return (
-    <StyledLogin className="loginForm" onSubmit={login}>
+    <StyledLogin className='loginForm' onSubmit={login}>
       <h2>Log in!</h2>
-      <label className="formLabel">Username:
-        <input 
-        type="text"
-        id="username"
-        className="formInput"
-        name='username'
-        placeholder="Enter Username"
-        onChange={changeHandler}
-        value={logValues.username}
+      <label className='formLabel'>
+        Username:
+        <input
+          type='text'
+          id='username'
+          className='formInput'
+          name='username'
+          placeholder='Enter Username'
+          onChange={changeHandler}
+          value={logValues.username}
         />
       </label>
-      <label className="formLabel">Password:
-        <input 
-        type="password"
-        id="password"
-        className="formInput"
-        name='password'
-        placeholder="Enter Password"
-        onChange={changeHandler}
-        value={logValues.password}
+      <label className='formLabel'>
+        Password:
+        <input
+          type='password'
+          id='password'
+          className='formInput'
+          name='password'
+          placeholder='Enter Password'
+          onChange={changeHandler}
+          value={logValues.password}
         />
       </label>
-      <button className="loginFormBtn"
-      type="submit"
-      >Log In</button>
+      <button className='loginFormBtn' type='submit'>
+        Log In
+      </button>
     </StyledLogin>
-  )
+  );
 }
 
-export default Login
+export default Login;

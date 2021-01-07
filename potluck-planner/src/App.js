@@ -1,31 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import styled from "styled-components";
-import * as yup from "yup";
-import schema from "./validation/schema";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import * as yup from 'yup';
+import schema from './validation/schema';
+import axios from 'axios';
 
-import Home from "./components/Home";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Login from "./components/Login";
-import Registration from "./components/Registration";
-import UserProfile from "./components/UserProfile";
+import Home from './components/Home';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Registration from './components/Registration';
+import UserProfile from './components/UserProfile';
+import ThankYou from './components/ThankYou';
 
 import { UserContext } from "./context/UserContext";
 
 const initialFormValues = {
-  username: "",
-  // email: '',
-  password: "",
-  // passwordConfirm: '',
+  username: '',
+  password: '',
 };
 
 const initialFormErrors = {
-  username: "",
-  // email: '',
-  password: "",
-  // passwordConfirm: '',
+  username: '',
+  password: '',
 };
 
 const initialMembers = [];
@@ -34,13 +31,8 @@ const initialDisabled = true;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 93vh;
+  min-height: 100vh;
   text-align: center;
-  background: url("https://background-tiles.com/overview/white/patterns/large/1027.png");
-
-  .foot {
-    align-self: flex-end;
-  }
 `;
 
 function App() {
@@ -86,18 +78,20 @@ function App() {
     });
   }, [formValues]);
 
+  let history = useHistory();
+
   const postNewMember = (newMember) => {
     axios
       .post("https://pl-planner.herokuapp.com/api/auth/register", newMember)
       .then((res) => {
         setMembers([res.data, ...members]);
-        setFormValues(initialFormValues);
       })
       .catch((error) => {
         if (error.response.status === 500) {
-          console.log(error);
+          history.push(`/thanks`);
+          setFormValues(initialFormValues);
         } else {
-          alert(error.response.data);
+          alert(error.response.data.message);
           console.log(error);
         }
       });
@@ -109,7 +103,6 @@ function App() {
       password: formValues.password,
     };
     postNewMember(newMember);
-    setFormValues(initialFormValues);
   };
 
   return (
@@ -123,6 +116,9 @@ function App() {
           <Switch>
             {/* Designing UserProfile, adding path/props after */}
             {/* /profile path is just for testing */}
+            <Route path='/thanks'>
+              <ThankYou values={formValues} />
+            </Route>
             <Route path="/profile">
               <UserProfile />
             </Route>
