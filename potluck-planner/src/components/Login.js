@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { axiosDev } from '../utils/axiosDev';
+import { UserContext } from '../context/UserContext'
 
 const StyledLogin = styled.form`
 display:flex;
@@ -39,9 +41,10 @@ const initialValues = {
 };
 
 function Login(props) {
-const [ logValues, setLogValues ] = useState(initialValues);
+  const [ logValues, setLogValues ] = useState(initialValues);
+  const { setLoggedInUser } = useContext(UserContext)
 
-let history = useHistory();
+  let history = useHistory();
 
   const login = event => {
    event.preventDefault();
@@ -50,6 +53,12 @@ let history = useHistory();
    .then(res => {
      window.localStorage.setItem("token", res.data.token)
      getUser();
+     
+     const loggedUser = {
+       user_id: res.data.user_id,
+       username: res.data.username
+     }
+     setLoggedInUser(loggedUser);
    })
    .catch(err => {
     console.log(err)
