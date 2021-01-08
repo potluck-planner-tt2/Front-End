@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { axiosDev } from '../utils/axiosDev';
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../context/UserContext';
 
 const StyledLogin = styled.form`
   display: flex;
@@ -40,32 +40,33 @@ const initialValues = {
   password: '',
 };
 
-function Login(props) {
-  const [ logValues, setLogValues ] = useState(initialValues);
-  const { setLoggedInUser } = useContext(UserContext)
+function Login() {
+  const [logValues, setLogValues] = useState(initialValues);
+  const { setLoggedInUser } = useContext(UserContext);
 
   let history = useHistory();
 
   const login = (event) => {
     event.preventDefault();
-    
-    axiosDev().post('/api/auth/login', logValues)
-      .then(res => {
-        window.localStorage.setItem("token", res.data.token)
-         
+
+    axiosDev()
+      .post('/api/auth/login', logValues)
+      .then((res) => {
+        window.localStorage.setItem('token', res.data.token);
+
         const loggedUser = {
           user_id: res.data.user_id,
-          username: res.data.username
-         }
+          username: res.data.username,
+        };
         setLoggedInUser(loggedUser);
-      
+
         history.push(`/profile/${res.data.user_id}`);
       })
-      .catch(err => {
-        console.log(err)
-      }) 
+      .catch((err) => {
+        console.log(err);
+      });
     setLogValues(initialValues);
-  }
+  };
 
   const changeHandler = (event) => {
     const { name, value } = event.target;

@@ -1,21 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/logo8.png';
+import { UserContext } from '../context/UserContext';
 
 const StyledHeader = styled.header`
-  /* background: linear-gradient(to bottom, #56ab2f, #a8e063); */
   background-color: #687864;
 
   .navBar {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    /* box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4); */
     border: 2px white;
     border-style: hidden hidden solid hidden;
     height: 110px;
-    /* width 100% for bigger screens / chop body to 80%? play with media queries*/
 
     h1 {
       font-family: 'Lobster', cursive;
@@ -90,21 +88,17 @@ const StyledHeader = styled.header`
   }
 `;
 
-function Header(props) {
+function Header() {
   const history = useHistory();
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   return (
     <StyledHeader>
       <nav className='navBar'>
         <div className='banner'>
           <div>
-            {/****** Fix logo image *****/}
             <Link to='/'>
-              <img
-                src={logo}
-                className='logo'
-                alt='Company Logo' /*Added alt text -MJ*/
-              />
+              <img src={logo} className='logo' alt='Company Logo' />
             </Link>
           </div>
           <div>
@@ -113,24 +107,53 @@ function Header(props) {
             </Link>
           </div>
         </div>
-        <div className='bannerButtons'>
-          <div>
-            <button
-              className='login btn'
-              onClick={() => history.push('/login')}
-            >
-              Login
-            </button>
+        {loggedInUser.user_id ? (
+          <div className='bannerButtons'>
+            <div>
+              <button
+                className='register btn'
+                onClick={() => history.push(`/profile/${loggedInUser.user_id}`)}
+              >
+                Profile
+              </button>
+            </div>
+            <div>
+              <button
+                className='login btn'
+                onClick={() => {
+                  history.push('/login');
+                  window.localStorage.removeItem('token');
+                  const loggedUser = {
+                    user_id: '',
+                    username: '',
+                  };
+                  setLoggedInUser(loggedUser);
+                }}
+              >
+                Logout
+              </button>
+            </div>
           </div>
-          <div>
-            <button
-              className='register btn'
-              onClick={() => history.push('/registration')}
-            >
-              Sign Up
-            </button>
+        ) : (
+          <div className='bannerButtons'>
+            <div>
+              <button
+                className='register btn'
+                onClick={() => history.push('/registration')}
+              >
+                Sign Up
+              </button>
+            </div>
+            <div>
+              <button
+                className='login btn'
+                onClick={() => history.push('/login')}
+              >
+                Login
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </nav>
     </StyledHeader>
   );
