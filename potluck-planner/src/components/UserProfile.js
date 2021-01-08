@@ -1,28 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {
-  NavLink,
-  Route,
-  useRouteMatch,
-  useParams,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+import { NavLink, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import EventCard from './EventCard';
 import EventForm from './EventForm';
 import { UserContext } from '../context/UserContext';
 import { axiosDev } from '../utils/axiosDev';
-import axios from 'axios';
-
-const initialPotlucks = [
-  {
-    name: '',
-    organizer_id: '',
-    date_time: '',
-    location: '',
-  },
-];
 
 const StyledUserProfile = styled.section`
   display: flex;
@@ -67,9 +50,26 @@ const StyledUserProfile = styled.section`
   }
 `;
 
-function UserProfile(props) {
-  const [potlucks, setPotlucks] = useState(initialPotlucks);
+const initialEventValues = {
+  name: '',
+  location: '',
+  date_time: '',
+};
 
+const initialPotlucks = [
+  {
+    name: '',
+    organizer_id: '',
+    date_time: '',
+    location: '',
+  },
+];
+
+function UserProfile() {
+  const [formValues, setFormValues] = useState(initialEventValues);
+  const [potlucks, setPotlucks] = useState(initialPotlucks);
+  const [userPots, setUserPots] = useState(initialPotlucks);
+  const history = useHistory();
   let match = useRouteMatch();
 
   const { loggedInUser } = useContext(UserContext);
@@ -79,7 +79,6 @@ function UserProfile(props) {
     axiosDev()
       .get('/api/potlucks')
       .then((res) => {
-        console.log(res.data);
         setPotlucks(res.data);
       })
       .catch((err) => {
@@ -87,15 +86,67 @@ function UserProfile(props) {
       });
   }, []);
 
-  // test
-  // potlucks.map(potluck => {
-  //   let sortPotlucks = [];
-  //   if (sortPotlucks.contains(potluck)) {
-  //     sortPotlucks.pop(potluck)
-  //   } else {
-  //     sortPotlucks.push(potluck);
-  //   }
-  // })
+  useEffect(() => {
+    const temparr = [];
+    potlucks.map((potluck) => {
+      if (
+        potluck.organizer_id === loggedInUser.user_id &&
+        !Object.keys(userPots).includes(potluck.pl_id)
+      ) {
+        temparr.push(potluck);
+      }
+      setUserPots(temparr);
+      return null;
+    });
+    //eslint-disable-next-line
+  }, [potlucks]);
+
+  const changeHandler = (event) => {
+    setFormValues({
+      ...formValues,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const newPotluck = {
+      name: formValues.name,
+      location: formValues.location.trim(),
+      date_time: formValues.date_time.trim(),
+      organizer_id: loggedInUser.user_id,
+    };
+    axiosDev()
+      .post('/api/potlucks', newPotluck)
+      .then((res) => {
+        console.log('Sucess!');
+        axiosDev()
+          .get('/api/potlucks')
+          .then((res) => {
+            setPotlucks(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(':(', err);
+      });
+    setFormValues(initialEventValues);
+    history.push(`/profile/${user_id}`);
+  };
+
+  useEffect(() => {
+    axiosDev()
+      .get('/api/potlucks')
+      .then((res) => {
+        setPotlucks(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <StyledUserProfile className='userProfile'>
@@ -106,14 +157,13 @@ function UserProfile(props) {
         <h3 className='eventMsg'>Upcoming Events</h3>
       </div>
       <div className='eventCardContainer'>
-        {potlucks.map((potluck) => {
+        {userPots.map((potluck) => {
           if (potluck.organizer_id === loggedInUser.user_id) {
             return (
               <EventCard
-              className="eventCard"
-              key={potluck.pl_id}
-              event={potluck}
-
+                className='eventCard'
+                key={potluck.pl_id}
+                event={potluck}
               />
             );
           }
@@ -126,7 +176,11 @@ function UserProfile(props) {
       </div>
       <div>
         <Route path={`${match.url}/:id/newpotluck`}>
-          <EventForm potlucks={potlucks} setPotlucks={setPotlucks} />
+          <EventForm
+            submit={submitHandler}
+            change={changeHandler}
+            values={formValues}
+          />
         </Route>
       </div>
     </StyledUserProfile>
