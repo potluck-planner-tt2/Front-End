@@ -1,51 +1,143 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { NavLink, Route, useRouteMatch, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 
 import EventCard from './EventCard';
 import EventForm from './EventForm';
 import { UserContext } from '../context/UserContext';
 import { axiosDev } from '../utils/axiosDev';
 
+import styled from 'styled-components';
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 60px auto;
+  background-color: #687864;
+  min-height: 500px;
+  width: 600px;
+  color: #f7f9fb;
+  font-family: droid-sans, sans-serif;
+  border: 2px solid white;
+  transition: 0.3s;
+
+  .events {
+    width: 800px;
+  }
+
+  h2 {
+    font-size: 4.5rem;
+    font-family: 'Lobster', cursive;
+    text-shadow: 4px 4px 0px #8fc1e3;
+  }
+
+  p {
+    font-size: 1.4rem;
+    font-family: droid-sans, sans-serif;
+    line-height: 1.2;
+    padding: 0 30px 10px;
+    font-weight: 500;
+  }
+
+  .errorWrapper {
+    margin: 30px;
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 650px) {
+    width: 400px;
+    min-height: 55vh;
+
+    h2 {
+      font-size: 3rem;
+    }
+
+    .error {
+      font-size: 1.1rem;
+    }
+  }
+`;
+
+const StyledEventWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 60px auto;
+  background-color: #687864;
+  width: 80%;
+  color: #f7f9fb;
+  font-family: droid-sans, sans-serif;
+  border: 2px solid white;
+  transition: 0.3s;
+
+  h2 {
+    font-size: 4.5rem;
+    font-family: 'Lobster', cursive;
+    text-shadow: 4px 4px 0px #8fc1e3;
+  }
+
+  @media (max-width: 650px) {
+    width: 400px;
+
+    h2 {
+      font-size: 3rem;
+    }
+  }
+`;
+
 const StyledUserProfile = styled.section`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
 
-  h2 {
-    font-size: 4rem;
-    padding: 10%;
-    margin: 5%;
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
   }
 
-  h3 {
-    font-size: 3rem;
-    padding: 10%;
-    margin: 5%;
+  @media (max-width: 650px) {
+    .container {
+      flex-direction: column;
+    }
   }
 
   .eventCardContainer {
     display: flex;
-    flex-flow: row wrap;
     justify-content: center;
-    margin: 30px 0;
+    flex-wrap: wrap;
+    margin: 30px;
   }
 
-  .newEventBtn {
-    font-family: 'Lobster', cursive;
-    padding: 15px 35px;
-    margin: 20px;
+  .btn {
+    padding: 10px 15px;
+    width: 200px;
+    margin-top: 20px;
+    border: none;
     border-radius: 7px;
-    font-size: 3rem;
-    text-decoration: underline;
-    font-weight: 400;
-    color: white;
-    text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.6);
-    background: #56ab2f;
-    border: 2px black solid;
+    font-size: 1.5rem;
+    color: #f7f9fb;
+    background: #8fc1e3;
+  }
 
+  .evntBtn {
+    width: 300px;
+  }
+
+  .btn:hover {
+    box-shadow: 0 0 0 2px #f7f9fb;
+    outline: white;
+  }
+
+  .btn:focus {
+    box-shadow: 0 0 0 2px #f7f9fb;
+    outline: white;
+  }
+
+  .btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
     :hover {
-      cursor: pointer;
+      box-shadow: 0 0 0 0px #f7f9fb;
+      outline: white;
     }
   }
 `;
@@ -150,31 +242,23 @@ function UserProfile() {
 
   return (
     <StyledUserProfile className='userProfile'>
-      <div className='welcomeMsg'>
-        <h2>Welcome back, {loggedInUser.username}</h2>
-      </div>
-      <div>
-        <h3 className='eventMsg'>Upcoming Events</h3>
-      </div>
-      <div className='eventCardContainer'>
-        {userPots.map((potluck) => {
-          if (potluck.organizer_id === loggedInUser.user_id) {
-            return (
-              <EventCard
-                className='eventCard'
-                key={potluck.pl_id}
-                event={potluck}
-              />
-            );
-          }
-        })}
-      </div>
-      <div>
+      <StyledWrapper>
+        <div className='welcomeMsg'>
+          <h2>
+            Welcome back
+            <br /> {loggedInUser.username}
+          </h2>
+        </div>
+        <p>
+          You can start here by creating a new event or
+          <br />
+          scroll down to see your upcoming evnets!
+        </p>
         <NavLink to={`${match.url}/${user_id}/newpotluck`}>
-          <button className='newEventBtn'>Create A New Event!</button>
+          <button className='btn evntBtn'>Create A New Event!</button>
         </NavLink>
-      </div>
-      <div>
+        <br />
+        <br />
         <Route path={`${match.url}/:id/newpotluck`}>
           <EventForm
             submit={submitHandler}
@@ -182,7 +266,26 @@ function UserProfile() {
             values={formValues}
           />
         </Route>
-      </div>
+      </StyledWrapper>
+      <StyledEventWrapper className='events'>
+        <h2 className='eventMsg'>Upcoming Events</h2>
+        <div className='eventCardContainer'>
+          {
+            //eslint-disable-next-line
+            userPots.map((potluck) => {
+              if (potluck.organizer_id === loggedInUser.user_id) {
+                return (
+                  <EventCard
+                    className='eventCard'
+                    key={potluck.pl_id}
+                    event={potluck}
+                  />
+                );
+              }
+            })
+          }
+        </div>
+      </StyledEventWrapper>
     </StyledUserProfile>
   );
 }
