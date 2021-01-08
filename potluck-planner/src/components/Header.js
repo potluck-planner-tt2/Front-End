@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+
 import logo from '../images/logo8.png';
 import { UserContext } from '../context/UserContext';
+
+import styled from 'styled-components';
 
 const StyledHeader = styled.header`
   background-color: #687864;
