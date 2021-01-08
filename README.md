@@ -1,6 +1,7 @@
 # Front-End
+
 User Platform:
-https://pot-luck-01-21.vercel.app/
+https://potluck-planner-tt-webft-2.vercel.app/
 
 Potluck Planner Product Vision Document:
 
