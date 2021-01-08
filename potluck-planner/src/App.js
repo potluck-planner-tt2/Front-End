@@ -133,8 +133,6 @@ function App() {
         <Wrapper>
           <Header />
           <Switch>
-            {/* Designing UserProfile, adding path/props after */}
-            {/* /profile path is just for testing */}
             <Route path='/thanks'>
               <ThankYou values={formValues} />
             </Route>
@@ -157,8 +155,8 @@ function App() {
               <Home />
             </Route>
           </Switch>
+          <Footer />
         </Wrapper>
-        <Footer />
       </UserContext.Provider>
     </div>
   );
