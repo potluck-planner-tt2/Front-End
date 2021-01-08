@@ -13,7 +13,8 @@ import Registration from './components/Registration';
 import UserProfile from './components/UserProfile';
 import ThankYou from './components/ThankYou';
 
-import { UserContext } from "./context/UserContext";
+import { UserContext } from './context/UserContext';
+import { axiosDev } from './utils/axiosDev';
 
 const initialFormValues = {
   username: '',
@@ -44,7 +45,7 @@ function App() {
   //CONTEXT -- GLOBAL STATE
   const initialUser = {
     user_id: null,
-    username: "",
+    username: '',
   };
 
   const [loggedInUser, setLoggedInUser] = useState(initialUser);
@@ -57,7 +58,7 @@ function App() {
       .then(() => {
         setFormErrors({
           ...formErrors,
-          [name]: "",
+          [name]: '',
         });
       })
       .catch((err) => {
@@ -82,11 +83,27 @@ function App() {
 
   const postNewMember = (newMember) => {
     axios
-      .post("https://pl-planner.herokuapp.com/api/auth/register", newMember)
+      .post('https://pl-planner.herokuapp.com/api/auth/register', newMember)
       .then((res) => {
         setMembers([res.data, ...members]);
       })
       .catch((error) => {
+        axiosDev()
+          .post('/api/auth/login', formValues)
+          .then((res) => {
+            window.localStorage.setItem('token', res.data.token);
+
+            const loggedUser = {
+              user_id: res.data.user_id,
+              username: res.data.username,
+            };
+            setLoggedInUser(loggedUser);
+
+            history.push(`/profile/${res.data.user_id}`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         if (error.response.status === 500) {
           history.push(`/thanks`);
           setFormValues(initialFormValues);
@@ -107,10 +124,12 @@ function App() {
 
   return (
     <div>
-      <UserContext.Provider value ={{
-        loggedInUser, 
-        setLoggedInUser
-      }}>
+      <UserContext.Provider
+        value={{
+          loggedInUser,
+          setLoggedInUser,
+        }}
+      >
         <Wrapper>
           <Header />
           <Switch>
@@ -119,13 +138,13 @@ function App() {
             <Route path='/thanks'>
               <ThankYou values={formValues} />
             </Route>
-            <Route path="/profile">
+            <Route path='/profile'>
               <UserProfile />
             </Route>
-            <Route path="/login">
+            <Route path='/login'>
               <Login />
             </Route>
-            <Route path="/registration">
+            <Route path='/registration'>
               <Registration
                 values={formValues}
                 onChange={onChange}
@@ -134,7 +153,7 @@ function App() {
                 errors={formErrors}
               />
             </Route>
-            <Route exact path="/">
+            <Route exact path='/'>
               <Home />
             </Route>
           </Switch>
