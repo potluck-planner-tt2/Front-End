@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import heroBg from '../images/family.jpg';
+import heroBg from '../images/family.webp';
 
 const StyledHeroImg = styled.div`
   background-image: url(${heroBg});
